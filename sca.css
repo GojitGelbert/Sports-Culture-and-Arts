@@ -341,7 +341,7 @@ body{
     color: var(--text-color);
 }
 
-.athlete_profile{
+.wrap_card_2{
     width: 50%;
     height: 300px;
     border: var(--border_color);
@@ -352,7 +352,7 @@ body{
     border-radius: 8px;
 }
 
-.athlete_profile_display{
+.card_logo_2{
     position: relative;
     width: 100%;
     height: 40%;
@@ -364,7 +364,7 @@ body{
     gap: 60px;
 }
 
-.athlete_profile_title{
+.card_title_2{
     font-size: 20px;
     font-weight: 800;
     display: block;
@@ -373,7 +373,7 @@ body{
     color: var(--text-color);
 }
 
-.athlete_profile_wrap{
+.card_text_2{
     width: 100%;
     border: var(--border_inside_color);
     gap: 10px;
@@ -389,7 +389,7 @@ body{
     height: 100px;
 }
 
-.athlete_form{
+.wrap_card_3{
     width: 50%;
     height: 300px;
     border: var(--border_color);
@@ -398,7 +398,7 @@ body{
 
 
 
-.athlete_form_title{
+.card_title_3{
     font-size: 26px;
     font-weight: 800;
     border: #00a1af solid;
@@ -442,7 +442,7 @@ body{
     border: brown solid;
 }
 
-.card_button_1, .athlete_profile_button, .athlete_form_button{
+.card_button_1, .card_button_2, .card_button_3{
     background-color: var(--button_color);
     color: var(--text-color);
     font-size: 14px;
@@ -454,10 +454,10 @@ body{
     border: none;
 }
 
-.card_button_1:active, .athlete_profile_button:active, .athlete_form_button:active{
+.card_button_1:active, .card_button_2:active, .card_button_3:active{
     transform: scale(0.95);
 }
-.card_button_1:hover, .athlete_profile_button:hover, .athlete_form_button:hover{
+.card_button_1:hover, .card_button_2:hover, .card_button_3:hover{
     transform: scale(1.05);
     text-decoration: underline;
 }
