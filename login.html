@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>ProjectSCA</title>
+</head>
+<body>
+    <div class="bodyloginpage">
+        <div class="maincontainer">
+                <form action="login.php" method="post" id="LoginForm">
+                    <h1>Sign in</h1>
+                    <div class="formcontainer">
+                        <div class="input-groupStudent_id">
+                            <label for="username" class="user-name">Username</label>
+                            <img class="Studentlogo"
+                                src="img/UserName.png"
+                                alt="student icon" />
+                            <input type="text" name="username" class="input-student-id" placeholder="Student ID">
+                            <span id="username-error" class="error-message">
+                                <?php echo $Empty_error_message_username != "" ? $Empty_error_message_username : $Unmatched_error_message_username ?>
+                            </span>
+                        </div>
+                        <div class="input-groupPassword">
+                            <label for="password" class="pass-word">Password</label>
+                            <img class="lockicon"
+                                src="img/IconLockPass.png"
+                                alt="password icon" />
+                            <input type="password" name="password" class="input-password" id="password"
+                                placeholder="Password">
+                            <span id="password-error" class="error-message">
+                                <?php echo $Empty_error_message_password ?>
+                                <?php echo $Unmatched_error_message_password ?>
+                            </span>
+                            <img id="show-icon"
+                                src="img/Open Eye_icon.png"
+                                alt="Show Password" onclick="togglePasswordVisibility()">
+                            <img id="hide-icon"
+                                src="img/CloseEyeHIDE.png"
+                                alt="Hide Password" style="display: none;" onclick="togglePasswordVisibility()">
+                        </div>
+                        <button type="submit" class="continue" value="Continue" name="Continue">Continue</button>
+                        <a href="#" class="forgotpass">Forget Password</a>
+                        <a href="https://www.facebook.com/profile.php?id=100064099749286"><img class="fb-logo"
+                                src="img/facebook.png"
+                                alt="fb of skc page" /></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="loginscript.js"></script>
+</body>
+</html>
