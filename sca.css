@@ -15,6 +15,9 @@
     --border_color: #000000 solid 2px;
     --border_inside_color: #000000 solid 1px;
     --border_inside_color_red: #ff0000 solid 1px;
+    --box-shadow:  0px -4px 6px black ,0px 4px 6px black;
+    --fill-color-svg: black;
+    --background_color: #689dff; 
 }
 
 .darkmode{
@@ -26,6 +29,9 @@
     --hero_text_color: white;
     --border_color: #dadada solid 2px;
     --border_inside_color: #dadada solid 1px;
+    --box-shadow: 0px -2px 4px #dadada , 0px 2px 6px #dadada;
+    --fill-color-svg: white;
+    --background_color: #789ce0; 
 }
 
 html, body {
@@ -50,7 +56,7 @@ body{
     justify-content: space-between;
     left: 0px;
     top:0px;
-    z-index: 10;
+    z-index: 1;
 }
 
 .header_container::before{
@@ -96,7 +102,7 @@ body{
 }
 
 .menu_icon {
-    display: none;
+    visibility: hidden;
     position: absolute;
     right: 70px;
     top: 22px;
@@ -128,7 +134,19 @@ body{
     transform: translateX(-12%);
 }
 
-.main_nav-link a{
+.login{
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.sign_up{
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.main_nav-link a, .login, .sign_up{
     display: block;
     text-decoration: none;
     color: var(--text-color);
@@ -136,7 +154,7 @@ body{
     font-weight: 600;
 }
 
-.nav_container a:hover{
+.nav_container a:hover, .login:hover, .sign_up:hover{
     text-decoration: underline;
     transform: scale(1.10); 
     transform: translateY(-10%);
@@ -152,34 +170,27 @@ body{
     top:22px;
     position: relative;
     right: 24px;
-    transform: rotate(0deg);
 }
 
 .theme_white{
     width: 30px;
     height: 30px;
-    background-color: #494848;
     border-radius: 12px;
     display: none;
-
+    fill: var(--fill-color-svg);
 }
 
 .theme_black{
     width: 28px;
     height: 28px;
-    background-color: #c4c4c4;
     border-radius: 12px;
     display: block;
+    fill: var(--fill-color-svg);
 }
 
 .background_theme:hover{
     transform: scale(1.10); 
     transform: translateY(-5%);
-}
-
-.darkmode .menu_icon{
-    background-color: #494848;
-    border-radius: 5px;
 }
 
 .darkmode .background_theme .theme_black{
@@ -188,6 +199,140 @@ body{
 
 .darkmode .background_theme .theme_white{
     display: block;
+}
+
+.modal_container{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0px;
+    left: 0px;
+    z-index: 1;
+    background: var(--primary-color-background);
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(20px);
+    animation: fadeScaleIn 0.3s ease;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.close{
+    position: absolute;
+    right: 20px;
+    top:20px;
+    width: 30px;
+    height: 30px;
+    z-index: 1;
+}
+
+.modal_content{
+    height: 500px;
+    width: 500px;
+    border: var(--border_color);
+    border-radius: 8px;
+    background-color: var(--primary-color-background);  
+}
+
+form{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: var(--border_inside_color_red);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form h1{
+    position: relative;
+    font-weight: 800;
+    color: var(--text-color);
+    font-size: 28px;
+    white-space: nowrap;
+    display: block;
+    align-items: center;
+    justify-content: center;
+}
+
+form .group_username{
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+form .user-name {
+    position: relative;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 18px;
+    white-space: nowrap;
+    left: 20px;
+  }
+
+form .input-student-id {
+  position: relative;
+  width: 100%;
+  font-weight: 500;
+  color: var(--text-color);
+  font-size: 14px;
+  height: 38px;
+  padding: 0px 10px 0px 46px;
+  background-color: var(--secondary-color);
+  border: 2px solid;
+}
+
+.group_username .user_logo{
+    position: absolute;
+}
+
+form .group_password{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+form .pass-word {
+    position: relative;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 18px;
+    white-space: nowrap;
+    left: 20px;
+  }
+
+form .input-password {
+  position: relative;
+  width: 100%;
+  font-weight: 500;
+  color: var(--text-color);
+  font-size: 14px;
+  display: flex;
+  height: 38px;
+  align-items: center;
+  gap: 18px;
+  padding: 0px 10px 0px 42px;
+  background-color: var(--secondary-color);
+  border: 2px solid;
+  top: 10px;
+  right: 0px;
+}
+
+.pass_logo{
+    position: absolute;
+    transform: translate(10px ,36px);
+}
+
+.pass_visible{
+    position: absolute;
+}
+
+.pass_hidden{
+    position: absolute;
 }
 
 .main_container{
@@ -302,7 +447,10 @@ body{
 .wrap_card{
     border: var(--border_color);
     background-color: var(--primary-color-background);
+    box-shadow: var(--box-shadow);
     overflow: hidden;
+    border-radius: 8px;
+    backdrop-filter: blur(100px);
 }
 
 .card_text_1{
@@ -310,18 +458,17 @@ body{
     flex-direction: column;
     width: 100%;
     height: 60%;
-    border: var(--border_inside_color);
     position: relative;
     bottom: 0px;
     gap:10px;
     align-items: center;
     justify-content: center;
     text-align: justify;
+    padding-inline: 10px;
 }
 
 .card_1{
     flex: 0 0 5em;
-    border: var(--border_inside_color);
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -330,20 +477,21 @@ body{
 
 .card_logo_1{
     position: relative;
-    width: 100%;
+    width: 99%;
     height: 40%;
-    border: var(--border_inside_color_red);
     display: flex;
     flex-direction: row;
+    left: 1px;
+    box-shadow: -3px 0px 10px #3a3a3a,
+                3px 0px 10px #3a3a3a;
 }
 
 .carousel_1{
     display: flex;
     flex-direction: row;
-    border: var(--border_inside_color);
     overflow: hidden;
-    box-shadow: inset -2px 0 3px #3a3a3a,
-                inset 2px 0 3px #3a3a3a;
+    box-shadow: inset -3px 0px 10px #3a3a3a,
+                inset 3px 0px 10px #3a3a3a;
 }
 
 .group_carousel_1{
@@ -355,38 +503,38 @@ body{
 }
 
 .card_group::-webkit-scrollbar{
+    display: none;
 }
 
-.wrap_span_a{
-    animation: reappear 6s infinite;
+/* .wrap_span_a{
+    animation: dropup_span 9s infinite;
+    animation-delay: 3s;
     border: var(--border_color);
-    display: flex;
-    flex-direction: row;
 }
 
 .wrap_span_b{
-    animation: reappear 6s infinite;
-    animation-delay: 2s;
+    animation: dropup_span 10s infinite;
+    animation-delay: 5s;
     border: var(--border_color);
 }
 
 .wrap_span_c{
-    animation: reappear 4s infinite;
-    animation-delay: 12s;
+    animation: dropup_span 12s infinite;
+    animation-delay: 7s;
     border: var(--border_color);
 }
 
 .wrap_span_d{
-    animation: reappear 4s infinite;
-    animation-delay: 12s;
+    animation: dropup_span 14s infinite;
+    animation-delay: 9s;
     border: var(--border_color);
 }
 
 .wrap_span_e{
-    animation: reappear 6s infinite 2s;
+    animation: dropup_span 8s infinite;
+    animation-delay: 1s;
     border: var(--border_color);
-    animation-delay: 12s;
-}
+} */
 
 .card_1 img{
     width: 70px;
@@ -402,15 +550,8 @@ body{
     color: var(--text-color);
 }
 
-.wrap_card_2{
-    width: 50%;
-    height: 300px;
-    border: var(--border_color);
-    display: flex;
-    flex-direction: column;
-    background-color: var(--primary-color-background);
-    padding: 10px;
-    border-radius: 8px;
+.card_p_1{
+    color: var(--text-color);
 }
 
 .card_logo_2{
@@ -438,6 +579,7 @@ body{
     width: 100%;
     border: var(--border_inside_color);
     gap: 10px;
+    padding-inline: 10px;
     height: 60%;
     display: flex;
     flex-direction: column;
@@ -445,19 +587,26 @@ body{
     align-items: center;
 }
 
-.woman{
-    width: 100px;
-    height: 100px;
+.card_p_2{
+    color: var(--text-color);
 }
 
-.wrap_card_3{
-    width: 50%;
-    height: 300px;
+.woman{
+    width: 80px;
+    height: 80px;
+    border-radius: 60px;
     border: var(--border_color);
-    background-color: var(--primary-color-background);
-    border-radius: 8px;
-    padding: 10px;
+    background-color: var(--background_color);
 }
+
+.man{
+    width: 80px;
+    height: 80px;
+    border-radius: 60px;
+    border: var(--border_color);
+    background-color: var(--background_color);
+}
+
 
 .card_logo_3{
     width: 100%;
@@ -474,31 +623,29 @@ body{
     align-items: center;
     justify-content: center;
     gap:10px;
+    padding-inline: 10px;
 }
 
 
 .card_title_3{
     font-size: 20px;
     font-weight: 800;
-    border: #00a1af solid;
     white-space: wrap;
     text-align: center;
-        display: block;
     color: var(--text-color);
 }
 
-.man{
-    width: 100px;
-    height: 100px;
+.card_p_3{
+    color: var(--text-color);
 }
 
 .contact_info{
-    display: flex;
-    flex-direction: row;
+    display: grid;
     width: 100%;
     height: 300px;
-    border: var(--border_color);
-    gap: 20px;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    padding-inline: 20px;
 }
 
 .end_footer{
@@ -516,7 +663,23 @@ body{
 }
 
 .contact{
-    border: brown solid;
+    border: var(--border_color);
+    width: 100%;
+    height: 300px;
+    border-radius: 12px;
+}
+
+#logo_2{
+    width: 200px;
+    height: 200px;
+    border: var(--border_inside_color);
+}
+
+.about{
+    border: var(--border_color);
+    width: 100%;
+    height: 300px;
+    border-radius: 12px;
 }
 
 .card_button_1, .card_button_2, .card_button_3{
@@ -548,17 +711,14 @@ body{
     }
 }
 
-@keyframes reappear {
-	0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-	40% {
-    transform: translateY(-5px);
-  }
-	60% {
-    transform: translateY(-5px);
-  }
+@keyframes dropup_span {
+    0%{
+        transform: scale(0%);
+    }
+
+    38% , 100%{
+        transform: scale(100%);
+    }
 }
 
 @keyframes carousel {
@@ -578,6 +738,11 @@ body{
     to {
         background-position: 200%;
     }
+}
+
+@keyframes fadeScaleIn {
+  from { opacity: 0;}
+  to { opacity: 1;}
 }
 
 @media only screen and (min-width: 1441px){
@@ -600,7 +765,7 @@ body{
     .main_nav-link{
         gap:25px;
     }
-    .main_nav-link a{
+    .main_nav-link a, .login, .sign_up{
         font-size: 14px;
         font-weight: 500;
     }
@@ -668,14 +833,14 @@ body{
         transform: translateX(0%);  
     }
     
-    .nav_container.active .main_nav-link a{
+    .nav_container.active .main_nav-link a, .nav_container.active .login, .nav_container.active .sign_up{
         transform: translateY(0px);
         transition: transform .3s ease;
         opacity: 1;
         transition-delay: calc(.1s * var(--i));
     }
 
-        .main_nav-link a{
+        .main_nav-link a, .login, .sign_up{
         font-size: 12px;
         font-weight: 600;
         opacity: 0;
@@ -683,15 +848,20 @@ body{
         transition: transform .3s ease;
   }
         .nav_menu{
+        position: absolute;
         width: 26px;
         height: 26px;
-        display: block;
+        opacity: 1;
+        fill: var(--fill-color-svg);
+        transform: rotate(0deg);
     }
 
     .close_nav{
         width: 26px;
         height: 26px;
-        display: none;
+        opacity:0;
+        transform: rotate(-90deg);
+        fill: var(--fill-color-svg);
     }
 
   .main_container{
@@ -703,16 +873,21 @@ body{
   }
 
   .card_container{
-    flex-direction: column;
     display: grid;
-    flex-grow: 0, 0, 0, 1;
+    grid-template-columns: repeat(3, 1fr);
   }
 
+    .wrap_card{
+        grid-column: 1/-1;
+        height: 240px;
+    }
+
     .menu_icon {
-        display: flex;
+        transition: transform 0.4s ease, opacity 0.3s ease;
+        visibility: visible;
+        opacity: 1;
         cursor: pointer;
         overflow: hidden;
-        display: block;
         background: none;
         box-decoration-break: none;
         border: none;
@@ -751,12 +926,24 @@ body{
   }
 
   .menu_icon.active .nav_menu {
-    display: none;
+    opacity: 0;
+    transform: rotate(90deg);
 }
 
 .menu_icon.active .close_nav {
-    display: block;
+    opacity: 1;
+    transform: rotate(0deg);
     }
+
+    .menu_icon svg {
+  transition: transform 0.4s ease, opacity 0.3s ease;
+    }
+
+  .main_nav-link li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 } 
 
 @media only screen and (max-width: 320px){
@@ -783,7 +970,7 @@ body{
         top:14px;
     }
 
-    .main_nav-link a{
+    .main_nav-link a, .login, .sign_up{
         font-size: 10px;
         font-weight: 500;
     }
@@ -900,7 +1087,7 @@ body{
         gap:15px;
     }
 
-    .main_nav-link a{
+    .main_nav-link a, .login, .sign_up{
         font-size: 7px;
     }
 
