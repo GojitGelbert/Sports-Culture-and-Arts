@@ -58,27 +58,5 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
- // loginscript.js
-
-function togglePasswordVisibility() {
-    const passwordInput = document.getElementById('password');
-    const showIcon = document.getElementById('show-icon');
-    const hideIcon = document.getElementById('hide-icon');
-
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        showIcon.style.display = 'none';
-        hideIcon.style.display = 'inline';
-    } else {
-        passwordInput.type = 'password';
-        showIcon.style.display = 'inline';
-        hideIcon.style.display = 'none';
-    }
-}
-showIcon.addEventListener('click', togglePasswordVisibility);
-hideIcon.addEventListener('click', togglePasswordVisibility);
-// Initially hide the hide-icon
-document.getElementById('hide-icon').style.display = 'none';
-
 });
 
