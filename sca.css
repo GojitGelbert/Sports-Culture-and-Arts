@@ -9,9 +9,11 @@
     --base-color: white;
     --text-color: black;
     --primary-color-background: #d8d8d8;
-    --modal_form: #b9ecff;
+    --stroke-svg: black;
+    --modal_form: radial-gradient(#c7d136, #f07a5de5);
     --footer_color: #c5c4be;
-    --button_color: #00a1af;
+    --button_color_card: #00a1af;
+    --button_color: #05a95c;
     --hero_text_color: #df8a1c;
     --border_color: #000000 solid 2px;
     --border_color-logo: #000000 solid 0px;
@@ -19,9 +21,12 @@
     --border_inside_color_red: #ff0000 solid 1px;
     --box-shadow:  0px -2px 6px black ,0px 2px 6px black;
     --fill-color-svg: black;
+    --fill-color-background-svg: #f1f1f1;
     --modal-shadow: 2px 2px 1px #99afd6, -2px -2px 1px #99afd6;
     --background_color: #99afd6; 
     --input_border: 1px #f1f1f1 solid;
+    --border-blinking-color: rgba(0, 0, 0, 0.75);
+    --border-blinking: 1px solid rgba(0, 0, 0, 0.75);
     --border-carousel: inset 0px 1px 5px #3a3a3a, inset 0px 1px 1px #3a3a3a;
     --border-container:  0px -1px 3px #3a3a3a ;
     --input-background: #f7f7f7;
@@ -37,18 +42,23 @@
     --base-color: rgb(26, 26, 26);
     --text-color: white;
     --primary-color-background: #202020;
+    --stroke-svg: white;
     --modal_form: transparent;
     --footer_color: #303030;
-    --button_color: #00a1af;
+    --button_color_card: #00a1af;
+    --button_color: #05a95c;
     --hero_text_color: white;
     --border_color: #dadada solid 2px;
     --border_color-logo: #dadada solid 2px;
     --border_inside_color: #dadada solid 1px;
     --box-shadow: 0px -2px 4px #dadada , 0px 2px 6px #dadada;
     --fill-color-svg: white;
+    --fill-color-background-svg: transparent;
     --modal-shadow: 1px 1px 5px rgb(255, 255, 255), -1px -1px 5px rgb(255, 255, 255);
-    --background_color: #8fb1ee; 
+    --background_color: transparent; 
     --input-border: 2px #5a5a5a solid;
+    --border-blinking-color: rgba(255, 255, 255, 0.75);
+    --border-blinking: 1px solid rgba(255, 255, 255, 0.75);
     --border-carousel:   inset -2px 0px 5px #c2c2c2, inset 2px 0px 5px #c2c2c2;
     --border-container:  0px -1px 5px #c2c2c2;
     --input-background: #171717;
@@ -250,6 +260,8 @@ body{
     width: 30px;
     height: 30px;
     z-index: 1;
+    fill: var(--fill-color-svg);
+    cursor: pointer;
 }
 
 .modal_content{
@@ -262,8 +274,12 @@ body{
     box-shadow: var(--modal-shadow);  
 }
 
+.modal_signup{
+    height: 550px;
+}
+
 #modal_1 form{
-    background-color: var(--modal_form);
+    background: var(--modal_form);
     border-radius: 10px;
     width: 100%;
     height: 100%;
@@ -272,8 +288,7 @@ body{
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    gap:24px;
-    background-color: var(--modal_form);
+    gap:30px;
 }
 
 form .h1_signup{
@@ -294,7 +309,6 @@ form .group_fullname{
     height: auto;
     display: flex;
     flex-direction: column;
-    border: var(--border_inside_color);
 }
 
 .group_fullname .user_fullname{
@@ -308,7 +322,6 @@ form .group_email{
     height: auto;
     display: flex;
     flex-direction: column;
-    border: var(--border_inside_color);
 }
 
 .user_gmail{
@@ -321,11 +334,10 @@ form .group_password_signup{
     width: 90%;
     height: auto;
     display: flex;
-    flex-direction: column;
-    border: var(--border_inside_color);
+    flex-direction: row;
 }
 
-.full-name, .pass-word_signup, .e-mail{
+.full-name, .pass-word_signup, .e-mail, .pass-word-confirm{
     position:absolute;
     transform: translate(40px, 8px);
     opacity: 0.5;
@@ -335,7 +347,8 @@ form .group_password_signup{
 
 .group_fullname.active .full-name,
 .group_email.active .e-mail,
-.group_password_signup.active .pass-word_signup{
+.group_password_signup.active .pass-word_signup,
+.group_password_confirm.active .pass-word-confirm{
     opacity: 1;
     transform: translate(10px, -23px);
     font-size: 16px;
@@ -343,8 +356,16 @@ form .group_password_signup{
     color: var(--text-color);
 }
 
-.gmail-message, .gmail-messageleast{
+.group_password_signup.active .span_group_pass{
+    opacity: 1;
+    transition: all ease 100ms;
+}
+
+.gmail-message{
     display: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: red;
 }
 
 .input_fullname{
@@ -368,6 +389,7 @@ form .group_password_signup{
 }
 
 .input_password_signup{
+    width: 100%;
     height: 38px;
     padding: 0px 40px 0px 42px;
     outline: none;
@@ -377,26 +399,116 @@ form .group_password_signup{
     border: var(--input-border);
 }
 
+.input-password_signup.active .span_group_pass{
+    display: flex;
+    z-index: 2;
+}
+
 .pass_logo_signup{
     position: absolute;
     transform: translate(10px ,6px);
     fill: var(--fill-color-svg);
 }
 
-.pass_visible_signup, .pass_hidden_signup{
+.group_icon_1{
     position: absolute;
     right: 0px;
     transform: translate(-30px, 7px);
+}
+
+.checkvalid_1{
+    position: absolute;
+    right: 0px;
+    transform: translate(-30px, 9px);
+    display: none;
+}
+
+.checkvalid_2{
+    position: absolute;
+    right: 0px;
+    transform: translate(-60px, 9px);
+    display: none;
+}
+
+.checkvalid_3{
+    position: absolute;
+    right: 0px;
+    transform: translate(-60px, 9px);
+    display: none;
+}
+
+.pass_visible_signup, .pass_hidden_signup{
+    fill: var(--fill-color-svg);
+    cursor: pointer;
+}
+
+.pass_hidden_signup, .pass_hidden_confirm{
+    display: none;
+}
+
+.pass-signup-info, .pass-signup-messageleast, .pass-signup-lowercase, .pass-signup-uppercase, .pass-signup-numbers, .pass-signup-symbols{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-color);
+    align-items: center;
+    cursor: none;
+    pointer-events: none;
+}
+
+.pass-signup-info{
+    margin-bottom: 10px;
+}
+
+.wrong{
+    display: flex;
+}
+
+.correct{
+    display: none;
+}
+
+.group_password_confirm{
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.input_password_confirm{
+    height: 38px;
+    padding: 0px 40px 0px 42px;
+    outline: none;
+    border-radius: 6px;
+    background-color: var(--input-background);
+    color: var(--text-color);
+    border: var(--input-border);
+}
+
+.pass_logo_confirm{
+    position: absolute;
+    transform: translate(10px ,6px);
     fill: var(--fill-color-svg);
 }
 
-.pass_hidden_signup, .pass-signup-messageleast, .pass-signup-lowercase, .pass-signup-uppercase, .pass-signup-numbers, .pass-signup-symbols{
-    display: none;
+.group_icon_2{
+    position: absolute;
+    right: 0px;
+    transform: translate(-30px, 7px);
+}
+
+.pass_visible_confirm, .pass_hidden_confirm{
+    fill: var(--fill-color-svg);
+    cursor: pointer;
 }
 
   .submit {
     width: 100px;
     height: 30px;
+    display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
@@ -413,13 +525,18 @@ form .group_password_signup{
   }
 
 .span_group_pass{
+    opacity: 0;
+    display: none;
     position: absolute;
     width: 90%;
     height: auto;
-    background-color: var(--background_color);
-    transform: translate(-1px,39px);
-    display: flex;
+    background-color: var(--input-background);
+    box-shadow: var(--border-container);
+    transform: translateY(44px);
     flex-direction: column;
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 1;
 }
 
 .span_gologin, .gologin{
@@ -444,6 +561,14 @@ form .group_password_signup{
     text-decoration: underline;
 }
 
+.signup_icon, .signup_text{
+    transform: translateX(-4px);
+}
+
+.signup_icon{
+    fill: var(--fill-color-svg);
+}
+
 #modal_2 form{
     position: relative;
     width: 100%;
@@ -454,7 +579,7 @@ form .group_password_signup{
     align-items: center;
     border-radius: 10px;
     gap:20px;
-    background-color: var(--modal_form);
+    background: var(--modal_form);
 }
 
 form .h1_login{
@@ -482,7 +607,7 @@ form .user-name {
     position: relative;
     font-weight: 600;
     color: var(--text-color);
-    font-size: 18px;
+    font-size: 16px;
     white-space: nowrap;
     left: 10px;
   }
@@ -490,19 +615,18 @@ form .user-name {
 form .input-student-id {
   position: relative;
   width: 100%;
-  font-weight: 500;
   color: var(--text-color);
-  font-size: 14px;
   height: 38px;
   padding: 0px 10px 0px 40px;
   border: var(--input-border);
   background: var(--input-background);
   outline: none;
+  border-radius: 6px;
 }
 
 .group_username .user_logo{
     position: absolute;
-    transform: translate(10px, 36px);
+    transform: translate(10px, 34px);
     fill: var(--fill-color-svg);
 }
 
@@ -517,7 +641,7 @@ form .pass-word_login {
     position: relative;
     font-weight: 600;
     color: var(--text-color);
-    font-size: 18px;
+    font-size: 16px;
     white-space: nowrap;
     left: 10px;
   }
@@ -525,9 +649,7 @@ form .pass-word_login {
 form .input-password_login {
   position: relative;
   width: 100%;
-  font-weight: 500;
   color: var(--text-color);
-  font-size: 14px;
   display: flex;
   height: 38px;
   align-items: center;
@@ -536,19 +658,21 @@ form .input-password_login {
   border: var(--input-border);
   background: var(--input-background);
   outline: none;
+  border-radius: 6px;
 }
 
 .pass_logo_login{
     position: absolute;
-    transform: translate(10px ,37px);
+    transform: translate(10px ,34px);
     fill: var(--fill-color-svg);
 }
 
-.pass_visible_login, .pass_hidden_login{
+.group_icon_3{
     position: absolute;
     right: 0px;
-    transform: translate(-30px, 37px);
+    transform: translate(-30px, 35px);
     fill: var(--fill-color-svg);
+    cursor: pointer;
 }
 
 .pass_hidden_login{
@@ -558,6 +682,8 @@ form .input-password_login {
   .continue {
     width: 100px;
     height: 30px;
+    display: flex;
+    gap: 2px;
     align-items: center;
     justify-content: center;
     font-weight: 700;
@@ -573,16 +699,17 @@ form .input-password_login {
     transform: scale(1.05);
   }
 
-  .forgotpass {
+  .goforgot {
     position: relative;
     left: 10px;
     font-weight: 600;
     text-decoration: none;
     color: var(--text-color);
     font-size: 14px;
+    width: fit-content;
   }
 
-  .forgotpass:hover{
+  .goforgot:hover{
     text-decoration: underline;
     color: #1a77f1;
   }
@@ -618,6 +745,11 @@ form .input-password_login {
 .gosignup:hover{
     color: #1a77f1;
     text-decoration: underline;
+}
+
+.login_icon, .login_text{
+    fill: var(--fill-color-svg);
+    transform: translateX(-8px);
 }
 
 .main_container{
@@ -764,19 +896,23 @@ form .input-password_login {
     padding-inline: 10px;
 }
 
-.card_1{
+.card_1, .card_2, .card_3, .card_4, .card_5{
     align-items: center;
     justify-content: center;
     text-align: center;
     position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-.card_1 span{
+.card_1 span, .card_2 span, .card_3 span, .card_4 span, .card_5 span{
     font-size: 14px;
     font-weight: 700;
     color: var(--text-color);
     cursor:none;
     pointer-events: none;
+    overflow: hidden;
 }
 
 .card_logo_1{
@@ -792,30 +928,12 @@ form .input-password_login {
     flex-direction: row;
     overflow: hidden;
     box-shadow: var(--border-carousel);
-}
-
-.transparent_left{
-    position: absolute;
-    width: 26px;
-    left:0px;
-    height: 100%;
-    z-index: 1;
-    background: var(--background_fade_left);
-}
-
-.transparent_right{
-    position: absolute;
-    width: 26px;
-    right:0px;
-    height: 100%;
-    z-index: 1;
-    background: var(--background_fade_right);
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.01), #000, rgba(0, 0, 0, 0.01));
 }
 
 .group_carousel_1{
     display: flex;
     flex-direction: row;
-    animation: carousel 10s linear infinite;
     gap: 50px;
     padding-right: 50px;
 }
@@ -824,7 +942,7 @@ form .input-password_login {
     display: none;
 }
 
-.card_1 img{
+.card_1 img, .card_2 img, .card_3 img, .card_4 img, .card_5 img{
     width: 60px;
     height: 60px;
 }
@@ -894,7 +1012,6 @@ form .input-password_login {
     font-size: 14px;
     font-weight: 500;
     overflow: hidden;
-    width: 0px;
     color: var(--text-color);
     cursor:none;
     pointer-events: none;
@@ -926,14 +1043,13 @@ form .input-password_login {
     width: 70%;
     height: 100%;
     padding-block: 10px;
-    white-space: nowrap; 
+    white-space: nowrap;
 }
 
 .span_group_2 span{
     font-size: 14px;
     font-weight: 500;
     overflow: hidden;
-    width: 0px;
     color: var(--text-color);
     cursor:none;
     pointer-events: none;
@@ -1005,9 +1121,108 @@ form .input-password_login {
 
 
 .card_logo_3{
+    position: relative;
     width: 100%;
     height: 40%;
-    border: var(--border_inside_color_red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.form-man{
+    width: 80px;
+    height: 80px;
+}
+
+.form-man-path{
+    stroke: var(--stroke-svg);
+    stroke-miterlimit: 10;
+    fill: var(--fill-color-background-svg);
+}
+
+.form-man-text{
+    fill: var(--fill-color-svg);
+}
+
+.form-man text{
+    cursor: none;
+    pointer-events: none;
+    fill: var(--fill-color-svg);
+}
+
+.form-woman{
+    width: 80px;
+    height: 80px;
+}
+
+.form-woman-path{
+    stroke: var(--stroke-svg);
+    stroke-miterlimit: 10;
+    fill: var(--fill-color-background-svg);
+}
+
+.form-woman-text{
+    fill: var(--fill-color-svg);
+}
+
+.form-woman text{
+    cursor: none;
+    pointer-events: none;
+    fill: var(--fill-color-svg);
+}
+
+.card_logo_forms{
+    position: absolute;
+    width: 100%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    top: 0px;
+}
+
+.logo_form{
+    display: flex;
+    width: 60%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.form_text{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 100%;
+    padding-block: 10px;
+    white-space: nowrap;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    overflow: hidden;
+}
+
+.form_1{
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    will-change: transform;
+}
+
+.form_2{
+    position: relative;
+    width: 80px;
+    height: 80px;
+    z-index: 1;
+}
+
+.form_3{
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    will-change: transform;
 }
 
 .card_text_3{
@@ -1206,7 +1421,7 @@ form .input-password_login {
 }
 
 .card_button_1, .card_button_2, .card_button_3{
-    background-color: var(--button_color);
+    background-color: var(--button_color_card);
     color: var(--text-color);
     font-size: 14px;
     font-weight: 700;
@@ -1225,6 +1440,24 @@ form .input-password_login {
     text-decoration: underline;
 }
 
+@keyframes SlideInFromRight {
+    from{
+        transform: translateX(0px) rotate(0deg) scaleX(-1)
+    }
+    to{
+        transform: translateX(20px) rotate(15deg) scaleX(-1);
+    }
+}
+
+@keyframes SlideInFromLeft {
+    from{
+        transform: translateX(0px) rotate(0deg)  scaleX(1)
+    }
+    to{
+        transform: translateX(-20px) rotate(-15deg) scaleX(1);
+    }
+}
+
 @keyframes label_animate {
     from{
         transform: translateY(0px);
@@ -1236,7 +1469,7 @@ form .input-password_login {
 
 @keyframes dropup {
   from {
-    transform: translateY(120%);
+    transform: translateY(300%);
 }
 	to{
    transform: translateY(0%);
@@ -1271,12 +1504,45 @@ form .input-password_login {
     }
 }
 
+@keyframes EaseIn {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes EaseOut {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
 @keyframes autotype {
-    from{
+    0%{
         width: 0px;
     }
-    to{
-        width: 90%;
+}
+
+@keyframes SlideInTextLeft {
+  0% {
+    transform: translateX(100%);
+    }
+    70% { 
+    transform: translateX(0%);
+    }
+}
+
+@keyframes bounces {
+    0%, 100%{
+        transform: translateY(0%);
+    }
+    50%{
+        transform: translateY(-10%);
     }
 }
 
