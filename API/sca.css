@@ -1,0 +1,4977 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root{
+    --base-color: white;
+    --base-error-color: #e40000;
+    --error-base-color: #ececec;
+    --text-color: black;
+    --primary-color-background: #d8d8d8;
+    --stroke-svg: black;
+    --modal_form: radial-gradient(#c7d136, #f07a5de5);
+    --footer_color: #c5c4be;
+    --button_color_card: #00a1af;
+    --button_color: #05a95c;
+    --hero_text_color: #df8a1c;
+    --border_color: #000000 solid 2px;
+    --border_color-logo: #000000 solid 0px;
+    --border_inside_color: #000000 solid 1px;
+    --border_inside_color_red: #ff0000 solid 1px;
+    --border_inside_color_blue: blue solid 1px;
+    --box-shadow:  0px -2px 6px black ,0px 2px 6px black;
+    --fill-color-svg: black;
+    --fill-color-background-svg: #f1f1f1;
+    --modal-shadow: -2px -2px 2px #dad481, 2px 2px 2px #dad481, 2px 0px 2px #dad481, -2px 0px 2px #dad481, 0px 0px 2px #dad481;
+    --modal-error-shadow: 0px 0px 0px transparent;    
+    --background_color: #99afd6; 
+    --input_border: 1px #f1f1f1 solid;
+    --border-blinking-color: rgba(0, 0, 0, 0.75);
+    --border-blinking: 1px solid rgba(0, 0, 0, 0.75);
+    --border-carousel: inset 0px 1px 5px #3a3a3a, inset 0px 1px 1px #3a3a3a;
+    --border-container:  0px -1px 3px #3a3a3a ;
+    --input-background: #f7f7f7;
+    --facebook-svg-fill: #1a77f1;
+    --facebook-svg-shadow:  0px 0px 0px #000000 ;
+    /* linear-gradient to right is the direction of color that start to right then slowly fade out its color to the left */
+    --background_fade_left: linear-gradient(to right, rgba(255,255,255, 1), transparent);
+    /* opposite to the comment line 24*/
+    --background_fade_right: linear-gradient(to left, rgba(255,255,255, 1), transparent);
+}
+
+.darkmode{
+    --base-color: rgb(26, 26, 26);
+    --base-error-color: #e40000;
+    --error-base-color: rgb(44, 44, 44);
+    --text-color: white;
+    --primary-color-background: #202020;
+    --stroke-svg: #757575;
+    --modal_form: transparent;
+    --footer_color: #303030;
+    --button_color_card: #00a1af;
+    --button_color: #05a95c;
+    --hero_text_color: white;
+    --border_color: #dadada solid 2px;
+    --border_color-logo: #dadada solid 2px;
+    --border_inside_color: #dadada solid 1px;
+    --border_inside_color_blue: rgb(0, 0, 0) solid 1px;
+    --box-shadow: 0px -2px 4px #dadada , 0px 2px 6px #dadada;
+    --fill-color-svg: white;
+    --fill-color-background-svg: transparent;
+    --modal-shadow: 1px 1px 5px rgb(255, 255, 255), -1px -1px 5px rgb(255, 255, 255);
+    --modal-error-shadow: -2px -2px 2px #ffffff, 2px 2px 2px #ffffff, 2px 0px 2px #ffffff, -2px 0px 2px #ffffff, 0px 0px 2px #ffffff;   
+    --background_color: transparent; 
+    --input-border: 2px #5a5a5a solid;
+    --border-blinking-color: rgba(255, 255, 255, 0.75);
+    --border-blinking: 1px solid rgba(255, 255, 255, 0.75);
+    --border-carousel:   inset -2px 0px 5px #c2c2c2, inset 2px 0px 5px #c2c2c2;
+    --border-container:  0px -1px 5px #c2c2c2;
+    --input-background: #171717;
+    --gmail-path: white;
+    --facebook-svg-fill: #0d1927;
+    --facebook-svg-shadow:  0px 1px 3px #000000 ;
+    --background_fade_left: linear-gradient(to right, rgb(0, 0, 0, 1), transparent);
+    --background_fade_right: linear-gradient(to left, rgb(0, 0, 0, 1), transparent);
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    scroll-behavior: smooth ;
+}
+
+body{
+    overflow-y: visible;
+    background-color: var(--base-color);
+    min-height: 100vh;
+}
+
+.header_container{
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 70px;
+    justify-content: space-between;
+    left: 0px;
+    top:0px;
+    z-index: 2;
+}
+
+.header_container::before{
+    content: "";
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(50px);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top:0px;
+}
+
+.logo_container{
+    display: flex;
+    align-items: center;
+    z-index: 0;
+    cursor:none;
+    pointer-events: none;
+}
+
+.logo_container svg{
+    width: 150px;
+    height: 150px;
+    margin: 4px 0px 0px 0px;
+}
+
+.logo_container span{
+    color: var(--text-color);
+    font-size: 16px;
+    font-weight: 700;
+    left: 112px;
+    position: absolute;
+    cursor:none;
+    pointer-events: none;
+    background: linear-gradient(to right, rgb(255, 147, 147), rgb(147, 255, 147), rgb(255, 199, 147) );
+    filter: drop-shadow(1px 0px 0px black);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: 200%;
+    animation: textcolor 5s linear infinite;  
+}
+
+.menu_icon {
+    visibility: hidden;
+    position: absolute;
+    right: 70px;
+    top: 22px;
+    justify-content: center;
+    align-items: center;
+}
+
+body.hasHover .menu_icon:hover{
+    transform: scale(1.10); 
+    transform: translateY(-5%);
+}
+
+.nav_container{
+    display: flex;
+    margin: 0px;
+    position: relative;
+    top:0px;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    justify-content: flex-end;
+}
+
+.main_nav-link{
+    display: flex;
+    list-style-type: none;
+    margin: 0px;
+    gap: 30px;
+    transform: translateX(-12%);
+}
+
+.login{
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.sign_up{
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.main_nav-link a, .login, .sign_up{
+    display: block;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+body.hasHover .nav_container a:hover, body.hasHover .login:hover, body.hasHover .sign_up:hover{
+    text-decoration: underline;
+    transform: scale(1.10); 
+    transform: translateY(-10%);
+}
+
+.background_theme {
+    display: flex;
+    height: 20px;
+    background: none;
+    box-decoration-break: none;
+    border: none;
+    cursor: pointer;
+    top:22px;
+    position: relative;
+    right: 24px;
+}
+
+.theme_white{
+    width: 30px;
+    height: 30px;
+    border-radius: 12px;
+    display: none;
+    fill: var(--fill-color-svg);
+}
+
+.theme_black{
+    width: 28px;
+    height: 28px;
+    border-radius: 12px;
+    display: block;
+    fill: var(--fill-color-svg);
+}
+
+body.hasHover .background_theme:hover{
+    transform: scale(1.10); 
+    transform: translateY(-5%);
+}
+
+.darkmode .background_theme .theme_black{
+    display: none;
+}
+
+.darkmode .background_theme .theme_white{
+    display: block;
+}
+
+.modal_container{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0px;
+    left: 0px;
+    z-index: 2;
+    background: var(--base-color);
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(20px);
+    animation: fadeScaleIn 0.3s ease;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.close{
+    position: absolute;
+    right: 20px;
+    top:20px;
+    width: 30px;
+    height: 30px;
+    z-index: 3;
+    fill: var(--fill-color-svg);
+    cursor: pointer;
+}
+
+.modal_content{
+    height: 500px;
+    width: 400px;
+    border-radius: 10px;
+    background-color: var(--base-color);
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(50px);
+    box-shadow: var(--modal-shadow);
+}
+
+.modal_signup{
+    height: 550px;
+}
+
+#modal_1 form{
+    background: var(--modal_form);
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:30px;
+}
+
+form .h1_signup{
+    position: relative;
+    font-weight: 800;
+    color: var(--text-color);
+    font-size: 28px;
+    white-space: nowrap;
+    cursor: none;
+    pointer-events: none;
+}
+
+form .group_fullname{
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.group_fullname .user_fullname{
+    position: absolute;
+    transform: translate(10px, 8px);
+    fill: var(--fill-color-svg);
+}
+
+form .group_email{
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.user_gmail{
+    position: absolute;
+    transform: translate(10px, 8px);
+    fill: var(--fill-color-svg);
+}
+
+form .group_password_signup{
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.full-name, .pass-word_signup, .e-mail, .pass-word-confirm{
+    position:absolute;
+    transform: translate(40px, 8px);
+    opacity: 0.5;
+    transition: all 200ms ease;
+    color: var(--text-color);
+}
+
+.group_fullname.active .full-name,
+.group_email.active .e-mail,
+.group_password_signup.active .pass-word_signup,
+.group_password_confirm.active .pass-word-confirm{
+    opacity: 1;
+    transform: translate(10px, -23px);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.group_password_signup.active .span_group_pass{
+    opacity: 1;
+    transition: all ease 100ms;
+}
+
+.gmail-message{
+    display: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: red;
+}
+
+.input_fullname{
+    height: 38px;
+    outline: none;
+    border-radius: 6px;
+    padding: 0px 38px 0px 42px;
+    background-color: var(--input-background);
+    color: var(--text-color);
+    border: var(--input-border);
+}
+
+.input_email{
+    height: 38px;
+    outline: none;
+    border-radius: 6px;
+    padding: 0px 36px 0px 42px;
+    background-color: var(--input-background);
+    color: var(--text-color);
+    border: var(--input-border);
+}
+
+.input_password_signup{
+    width: 100%;
+    height: 38px;
+    padding: 0px 66px 0px 42px;
+    outline: none;
+    border-radius: 6px;
+    background-color: var(--input-background);
+    color: var(--text-color);
+    border: var(--input-border);
+}
+
+.input_password_signup.active .span_group_pass{
+    display: flex;
+    z-index: 2;
+}
+
+.pass_logo_signup{
+    position: absolute;
+    transform: translate(10px ,6px);
+    fill: var(--fill-color-svg);
+}
+
+.group_icon_1{
+    position: absolute;
+    right: 0px;
+    transform: translate(-30px, 7px);
+    display: flex;
+}
+
+.checkvalid_1{
+    position: absolute;
+    right: 0px;
+    transform: translate(-30px, 9px);
+    display: none;
+}
+
+.checkvalid_2{
+    position: absolute;
+    right: 0px;
+    transform: translate(-30px, 9px);
+    display: none;
+}
+
+.checkvalid_3{
+    position: absolute;
+    right: 0px;
+    transform: translate(-60px, 9px);
+    display: none;
+}
+
+.checkvalid_4{
+    position: absolute;
+    right: 0px;
+    transform: translate(-60px, 9px);
+    display: none;
+}
+
+.pass_visible_signup, .pass_hidden_signup{
+    fill: var(--fill-color-svg);
+    cursor: pointer;
+}
+
+.pass_hidden_signup, .pass_hidden_confirm{
+    display: none;
+}
+
+.pass-signup-info, .pass-signup-messageleast, .pass-signup-lowercase, .pass-signup-uppercase, .pass-signup-numbers, .pass-signup-symbols{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-color);
+    align-items: center;
+    cursor: none;
+    pointer-events: none;
+}
+
+.pass-signup-info{
+    margin-bottom: 10px;
+}
+
+.wrong{
+    display: flex;
+}
+
+.correct{
+    display: none;
+}
+
+.group_password_confirm{
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.input_password_confirm{
+    height: 38px;
+    padding: 0px 66px 0px 42px;
+    outline: none;
+    border-radius: 6px;
+    background-color: var(--input-background);
+    color: var(--text-color);
+    border: var(--input-border);
+}
+
+.pass_logo_confirm{
+    position: absolute;
+    transform: translate(10px ,6px);
+    fill: var(--fill-color-svg);
+}
+
+.group_icon_2{
+    position: absolute;
+    right: 0px;
+    transform: translate(-30px, 7px);
+    display: flex;
+}
+
+.pass_visible_confirm, .pass_hidden_confirm{
+    fill: var(--fill-color-svg);
+    cursor: pointer;
+}
+
+  .submit {
+    width: 100px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    background-color: var(--button_color);
+    font-size: 14px;
+    border-radius: 12px;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+  }
+
+  body.hasHover .submit:hover{
+    transform: scale(1.05);
+  }
+
+.span_group_pass{
+    opacity: 0;
+    display: none;
+    position: absolute;
+    width: 90%;
+    height: auto;
+    background-color: var(--input-background);
+    box-shadow: var(--border-container);
+    transform: translateY(40px);
+    flex-direction: column;
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 1;
+}
+
+.span_gologin, .gologin{
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.span_gologin{
+    cursor: none;
+    pointer-events: none;
+}
+
+.gologin{
+    text-decoration: none;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+body.hasHover .gologin:hover{
+    color: #1a77f1;
+    text-decoration: underline;
+}
+
+.signup_icon, .signup_text{
+    transform: translateX(-4px);
+}
+
+.signup_icon{
+    fill: var(--fill-color-svg);
+}
+
+#modal_2 form{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    gap:20px;
+    background: var(--modal_form);
+}
+
+form .h1_login{
+    position: relative;
+    font-weight: 800;
+    color: var(--text-color);
+    font-size: 28px;
+    white-space: nowrap;
+    cursor: none;
+    pointer-events: none;
+}
+
+form .group_username{
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+form .user-name {
+    position: relative;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 16px;
+    white-space: nowrap;
+    left: 10px;
+  }
+
+form .input-username {
+  position: relative;
+  width: 100%;
+  color: var(--text-color);
+  height: 38px;
+  padding: 0px 10px 0px 40px;
+  border: var(--input-border);
+  background: var(--input-background);
+  outline: none;
+  border-radius: 6px;
+}
+
+.user_logo, .email_address, .number{
+    fill: var(--fill-color-svg)
+}
+
+.email_address, .number{
+    display: none;
+}
+
+.group_svg_1{
+    position: absolute;
+    transform: translate(10px, 34px);
+}
+
+form .group_password_login{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+form .pass-word_login {
+    position: relative;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 16px;
+    white-space: nowrap;
+    left: 10px;
+  }
+
+form .input-password_login {
+  position: relative;
+  width: 100%;
+  color: var(--text-color);
+  display: flex;
+  height: 38px;
+  align-items: center;
+  gap: 18px;
+  padding: 0px 40px 0px 38px;
+  border: var(--input-border);
+  background: var(--input-background);
+  outline: none;
+  border-radius: 6px;
+}
+
+.pass_logo_login{
+    position: absolute;
+    transform: translate(10px ,34px);
+    fill: var(--fill-color-svg);
+}
+
+.group_icon_3{
+    position: absolute;
+    right: 0px;
+    transform: translate(-30px, 35px);
+    cursor: pointer;
+    display: flex;
+}
+
+.pass_visible_login, .pass_hidden_login{
+    fill: var(--fill-color-svg);
+}
+
+.pass_hidden_login{
+    display: none;
+}
+
+  .continue {
+    width: 100px;
+    height: 30px;
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    background-color: var(--button_color);
+    font-size: 14px;
+    border-radius: 12px;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+  }
+
+  body.hasHover .continue:hover{
+    transform: scale(1.05);
+  }
+
+  .goforgot {
+    position: relative;
+    left: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 14px;
+    width: fit-content;
+  }
+
+  body.hasHover .goforgot:hover{
+    text-decoration: underline;
+    color: #1a77f1;
+  }
+
+   .fb-logo {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    bottom: 20px;
+    transform: translateX(140px);
+    border-radius: 8px;
+    fill: var(--facebook-svg-fill);
+    box-shadow: var(--facebook-svg-shadow);
+  }
+
+  .span_gosignup, .gosignup{
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.span_gosignup{
+    cursor: none;
+    pointer-events: none;
+}
+
+.gosignup{
+    text-decoration: none;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+body.hasHover .gosignup:hover{
+    color: #1a77f1;
+    text-decoration: underline;
+}
+
+.login_icon, .login_text{
+    fill: var(--fill-color-svg);
+    transform: translateX(-8px);
+}
+
+.error{
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--base-error-color);
+}
+
+.modal_error_login{
+    height: 200px;
+    width: 300px;
+    border-radius: 10px;
+    background: var(--error-base-color);
+    box-shadow: var(--modal-error-shadow);
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+#Notmatch_login{
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-color)
+}
+
+.error_icon_login{
+    width: 60px;
+    height: 60px;
+}
+
+.modal_error_close_login{
+    width: 50px;
+    height: 30px;
+    background-color: var(--button_color_card);
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-color);
+    transform: translateY(10px);
+}
+
+.modal_error_close_login:hover{
+    transform: translateY(10px) scale(1.05);
+}
+
+#modal_3 form{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    gap:30px;
+    background: var(--modal_form);
+}
+
+form .forgot_title{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form .h1_forgot{
+    position: relative;
+    font-weight: 800;
+    color: var(--text-color);
+    font-size: 28px;
+    white-space: nowrap;
+    cursor: none;
+    pointer-events: none;
+}
+
+form .forgot_text{
+    font-size: 14px;
+    font-weight: 500;
+    width: 90%;
+    height: auto;
+    display: flex;
+    text-align: justify;
+    color: var(--text-color)
+}
+
+form .group_email_mobile{
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+}
+
+form .email_mobile {
+    position: relative;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 16px;
+    white-space: nowrap;
+    left: 10px;
+}
+
+form .input-email-mobile {
+  position: relative;
+  width: 100%;
+  color: var(--text-color);
+  height: 38px;
+  padding: 0px 10px 0px 40px;
+  border: var(--input-border);
+  background: var(--input-background);
+  outline: none;
+  border-radius: 6px;
+}
+
+form input::placeholder{
+    color: var(--text-color);
+}
+
+.group_icon_4{
+    position: absolute;
+    left: 0px;
+    transform: translate(10px, 35px);
+    display: flex;
+}
+
+.emailadd, .mobile-number, .default-icon{
+    fill: var(--fill-color-svg)
+}
+
+.emailadd, .mobile-number{
+    display: none;
+}
+
+  .continueforgot {
+    width: 100px;
+    height: 30px;
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    background-color: var(--button_color);
+    font-size: 14px;
+    border-radius: 12px;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+  }
+
+  .gotologin{
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+body.hasHover .gotologin:hover{
+    text-decoration: underline;
+}
+
+.error{
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--base-error-color);
+}
+
+.modal_error_forgot{
+    height: 200px;
+    width: 300px;
+    border-radius: 10px;
+    background: var(--error-base-color);
+    box-shadow: var(--modal-error-shadow);
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+#EmptyForgot{
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-color)
+}
+
+.error_icon_forgot{
+    width: 60px;
+    height: 60px;
+}
+
+.modal_error_close_forgot{
+    width: 50px;
+    height: 30px;
+    background-color: var(--button_color_card);
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-color);
+    transform: translateY(10px);
+}
+
+.modal_error_close_forgot:hover{
+    transform: translateY(10px) scale(1.05);
+}
+
+.main_container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0px;
+    max-width: 1600px;
+    margin: 0px auto;
+    height: auto;
+    overflow: hidden;
+}
+
+.hero_banner{
+  display: flex;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  height: 500px;
+  overflow: hidden;
+}
+
+.content{
+    position: static;
+    width: 100%;
+    height: auto;
+    object-fit: fill;
+}
+
+.text_container{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    height: 86%;
+    top:70px;
+}
+
+.text_container h1 {
+  opacity: 0;
+  transition: opacity 1s ease;
+  visibility: hidden;
+}
+
+.text_container h1.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.container_text_1, .container_text_2, .container_text_3{
+    position: relative;
+    cursor:none;
+    pointer-events: none;
+}
+
+.content_text_1, .content_text_2, .content_text_3{
+    filter: drop-shadow(1.5px 0px 0px black);
+    color: var(--hero_text_color);
+    animation: dropup 4s ease forwards;
+}
+
+.container_text_1{
+    top: 80px;
+    left: 120px;
+    width: 29.3%;
+    height: auto;
+    overflow: hidden;
+}
+
+.content_text_1{
+    text-align:center;
+    font-size: clamp(.4em,3.0em, 5em);;
+    font-weight: 700;
+    box-shadow:black 2px;
+    display: inline-block;
+    white-space: wrap;
+    overflow: hidden;
+}
+
+.container_text_2{
+    width: 30%;
+    top: 100px;
+    left: 140px;
+    height: auto;
+    overflow: hidden;
+}
+
+.container_text_3{
+    width: 28%;
+    top: 100px;
+    left: 140px;
+    height: auto;
+    overflow: hidden;
+}
+
+.content_text_2{
+    text-align:start;
+    font-size: clamp(.4em,1.0em, 5em);
+    font-weight: 700;
+    white-space: wrap;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.content_text_3{
+    text-align:start;
+    font-size: clamp(.4em,1.0em, 5em);
+    font-weight: 700;
+    white-space: wrap;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.card_container{
+    position: relative;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    padding-inline: 20px;
+    overflow: hidden;
+}
+
+.wrap_card{
+    border: var(--border_color);
+    background-color: var(--primary-color-background);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    border-radius: 8px;
+    position: relative;
+    height: 240px;
+}
+
+.card_text_1{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 60%;
+    position: relative;
+    gap:8px;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 10px;
+}
+
+.card_1, .card_2, .card_3, .card_4, .card_5{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.card_1 span, .card_2 span, .card_3 span, .card_4 span, .card_5 span{
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-color);
+    cursor:none;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.card_logo_1{
+    position: relative;
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+}
+
+.carousel_1{
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    box-shadow: var(--border-carousel);
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.01), #000, rgba(0, 0, 0, 0.01));
+}
+
+.group_carousel_1{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    padding-right: 50px;
+}
+
+.carousel_1::-webkit-scrollbar{
+    display: none;
+}
+
+.card_1 img, .card_2 img, .card_3 img, .card_4 img, .card_5 img{
+    width: 60px;
+    height: 60px;
+}
+
+.card_title_1{
+    font-size: 20px;
+    font-weight: 800;
+    display: block;
+    white-space: wrap;
+    text-align: center;
+    color: var(--text-color);
+    cursor:none;
+    pointer-events: none;
+}
+
+.card_p_1{
+    color: var(--text-color);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-align: justify;
+    cursor:none;
+    pointer-events: none;
+}
+
+.card_logo_2{
+    position: relative;
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+}
+
+ .card_logo_man{
+    position: absolute;
+    width: 100%;
+    height: 40%;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top:0px;
+}
+
+.logo_man{
+    display: flex;
+    width: 50%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.span_group_1{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    padding-block: 10px;
+    white-space: nowrap;
+    position: relative;
+    transform: translateX(-20px);
+    top:-2px;
+}
+
+.span_group_1 span{
+    font-size: 14px;
+    font-weight: 500;
+    overflow: hidden;
+    color: var(--text-color);
+    cursor:none;
+    pointer-events: none;
+}
+
+.card_logo_woman{
+    position: absolute;
+    width: 100%;
+    height: 40%;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top:0px;
+}
+
+.logo_woman{
+    display: flex;
+    width: 50%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.span_group_2{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    padding-block: 10px;
+    white-space: nowrap;
+    transform: translateX(-20px);
+    position: relative;
+    top: -2px;
+}
+
+.span_group_2 span{
+    font-size: 14px;
+    font-weight: 500;
+    overflow: hidden;
+    color: var(--text-color);
+    cursor:none;
+    pointer-events: none;
+}
+
+.card_title_2{
+    font-size: 20px;
+    font-weight: 800;
+    display: block;
+    white-space: wrap;
+    text-align: center;
+    color: var(--text-color);
+    cursor:none;
+    pointer-events: none;
+}
+
+.card_text_2{
+    width: 100%;
+    gap: 6px;
+    padding-inline: 10px;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow:  var(--border-container);
+}
+
+.card_p_2{
+    color: var(--text-color);
+    font-size: 15px;
+    font-weight: 600;
+    text-align: justify;
+    cursor:none;
+    pointer-events: none;
+}
+
+.woman_1{
+    width: 80px;
+    height: 80px;
+    border-radius: 60px;
+    border: var(--border_color-logo);
+    background-color: var(--background_color);
+}
+
+.man_1{
+    width: 80px;
+    height: 80px;
+    border-radius: 60px;
+    border: var(--border_color-logo);
+    background-color: var(--background_color);
+}
+
+.woman_2{
+    width: 80px;
+    height: 80px;
+    border-radius: 60px;
+    border: var(--border_color-logo);
+    background-color: var(--background_color);
+}
+
+.man_2{
+    width: 80px;
+    height: 80px;
+    border-radius: 60px;
+    border: var(--border_color-logo);
+    background-color: var(--background_color);
+}
+
+
+.card_logo_3{
+    position: relative;
+    width: 100%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.form-man{
+    width: 80px;
+    height: 80px;
+}
+
+.form-man text{
+    cursor: none;
+    pointer-events: none;
+    fill: black;
+}
+
+.form-woman{
+    width: 80px;
+    height: 80px;
+}
+
+.form-woman text{
+    cursor: none;
+    pointer-events: none;
+    fill: black;
+}
+
+.card_logo_forms{
+    position: absolute;
+    width: 100%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    top: 0px;
+}
+
+.logo_form{
+    display: flex;
+    width: 60%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.form_text{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 100%;
+    padding-block: 10px;
+    white-space: nowrap;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    overflow: hidden;
+    color: var(--text-color)
+}
+
+.form_1{
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    will-change: transform;
+}
+
+.form_2{
+    position: relative;
+    width: 80px;
+    height: 80px;
+    z-index: 1;
+}
+
+.form_3{
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    will-change: transform;
+}
+
+.card_text_3{
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:6px;
+    padding-inline: 10px;
+    box-shadow:  var(--border-container);
+}
+
+.card_title_3{
+    font-size: 20px;
+    font-weight: 800;
+    white-space: wrap;
+    text-align: center;
+    color: var(--text-color);
+    cursor:none;
+    pointer-events: none;
+}
+
+.card_p_3{
+    color: var(--text-color);
+    font-size: 15px;
+    font-weight: 600;
+    text-align: justify;
+    cursor:none;
+    pointer-events: none;
+}
+
+.info{
+    display: grid;
+    width: 100%;
+    height: 250px;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    padding-inline: 20px;
+    padding-bottom: 20px;
+}
+
+.end_footer{
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    padding: 8px;
+    background-color:var(--footer_color);
+    position: relative;
+    bottom: 0px;
+}
+
+.copyright{
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-color);
+    cursor:none;
+    pointer-events: none;
+}
+
+.contact_container{
+    border: var(--border_color);
+    width: 100%;
+    height: 230px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    color: var(--text-color);
+    background: var(--primary-color-background);
+}
+
+.contact_logo_title{
+    width: 100%;
+    height: 45%;
+    display: flex;
+    flex-direction: row;
+}
+
+.contact_logo{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.contact_title{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    transform: translateX(-50px);
+}
+
+.contact_title h1{
+    position: relative;
+    font-size: 26px;
+    font-weight: 700;
+    cursor:none;
+    pointer-events: none;
+    transform: translateY(-2px);
+}
+
+.contact_info{
+    width: 100%;
+    height: 55%;
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+    justify-content: center;
+}
+
+.gmail_container{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    position: relative;
+    left: 80px;
+}
+
+.gmail_container span{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+body.hasHover .gmail_container span:hover{
+    text-decoration: underline;
+    color: #1a77f1;
+    cursor: pointer;;
+}
+
+.facebook_container{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    position: relative;
+    left: 80px;
+}
+
+.facebook_container span{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+body.hasHover .facebook_container span:hover{
+    text-decoration: underline;
+    color: #1a77f1;
+    cursor: pointer;;
+}
+
+.logo_contact{
+    width: 200px;
+    height: 200px;
+    position: relative;
+    top: 4px;
+    transform: translateX(0px);
+}
+
+.gmail{
+    width: 34px;
+    height: 34px;
+    fill: var(--gmail-svg-fill);
+}
+
+.facebook{
+    fill: var(--facebook-svg-fill);
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+}
+
+.about_container{
+    border: var(--border_color);
+    width: 100%;
+    height: 230px;
+    border-radius: 12px;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    padding-inline: 20px;
+    background-color: var(--primary-color-background);
+    overflow: hidden;
+}
+
+.about{
+    display: flex;
+    flex-direction: column;
+    height: 230px;
+    gap: 14px;
+    cursor:none;
+    pointer-events: none;
+}
+
+.about h1{
+    position: relative;
+    margin-top: 20px;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.about p{
+    text-align: justify;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.card_button_1, .card_button_2, .card_button_3{
+    background-color: var(--button_color_card);
+    color: var(--text-color);
+    font-size: 14px;
+    font-weight: 700;
+    padding-block: 4px;
+    border-radius: 12px;
+    width: 70px;
+    cursor: pointer;
+    border: none;
+}
+
+.card_button_1:active, .card_button_2:active, .card_button_3:active{
+    transform: scale(0.95);
+}
+body.hasHover .card_button_1:hover, body.hasHover .card_button_2:hover, body.hasHover .card_button_3:hover{
+    transform: scale(1.05);
+    text-decoration: underline;
+}
+
+@keyframes SlideInFromRight {
+    from{
+        transform: translateX(0px) rotate(0deg) scaleX(-1)
+    }
+    to{
+        transform: translateX(20px) rotate(15deg) scaleX(-1);
+    }
+}
+
+@keyframes SlideInFromLeft {
+    from{
+        transform: translateX(0px) rotate(0deg)  scaleX(1)
+    }
+    to{
+        transform: translateX(-20px) rotate(-15deg) scaleX(1);
+    }
+}
+
+@keyframes label_animate {
+    from{
+        transform: translateY(0px);
+    }
+    to{
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes dropup {
+  from {
+    transform: translateY(300%);
+}
+	to{
+   transform: translateY(0%);
+    }
+}
+
+@keyframes scalefadeout {
+    0%{
+        transform: scale(1);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    100%{
+        transform: scale(0.8);
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes scalefadein {
+    0%{
+        transform: scale(0.8);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    100%{
+        transform: scale(1);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@keyframes EaseIn {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes EaseOut {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+@keyframes autotype {
+    0%{
+        width: 0px;
+    }
+}
+
+@keyframes SlideInTextLeft {
+  0% {
+    transform: translateX(100%);
+    }
+    70% { 
+    transform: translateX(0%);
+    }
+}
+
+@keyframes bounces {
+    0%, 100%{
+        transform: translateY(0%);
+    }
+    50%{
+        transform: translateY(-10%);
+    }
+}
+
+@keyframes carousel {
+  0% {
+    transform: translateX(0%);
+}
+  100%{
+   transform: translateX(-100%);
+    }
+}
+
+
+@keyframes textcolor {
+    from {
+        background-position: 0;
+    }
+    to {
+        background-position: 200%;
+    }
+}
+
+@keyframes fadeScaleIn {
+  from { opacity: 0;}
+  to { opacity: 1;}
+}
+
+@media only screen and (min-width: 1441px){
+    .container_text_1{
+        width: 25%;
+    }
+
+    .card_text_1{
+        gap:10px;
+    }
+
+    .card_text_2{
+        gap: 10px;
+    }
+
+    .card_text_1 *, .card_text_2 *, .card_text_3 *{
+        transform: translateY(0px);
+    }
+    .card_text_3{
+        gap: 10px;
+    }
+    .logo_contact{
+        transform: translateX(60px);
+    }
+    
+    .contact_title{
+        transform: translateX(0px);
+    }
+
+    .contact_logo{
+        width: 56%;
+        position: relative;
+        justify-content: end;
+    }
+
+    .contact_container{
+        height: 200px;
+    }
+
+    .info{
+        height: 220px;
+    }
+
+    .about_container{
+        height: 200px;
+    }
+
+    .contact_info{
+        align-items: start;
+        justify-content: center;
+    }
+
+    .gmail_container, .facebook_container{
+        transform: translate(110px, -10px);
+    }
+}
+
+@media only screen and (min-width: 1413px) and (max-width: 1440px){
+    .container_text_1{
+        width: 25%;
+    }
+
+    .card_text_1{
+        gap:10px;
+    }
+
+    .card_text_2{
+        gap: 10px;
+    }
+
+    .card_text_1 *, .card_text_2 *, .card_text_3 *{
+        transform: translateY(0px);
+    }
+    .card_text_3{
+        gap: 10px;
+    }
+        .logo_contact{
+        transform: translateX(0px);
+    }
+    
+    .contact_title{
+        width: 140%;
+        transform: translateX(-60px);
+    }
+
+    .contact_logo{
+        width: 50%;
+        position: relative;
+    }
+
+    .contact_container{
+        height: 210px;
+    }
+
+    .info{
+        height: 230px;
+    }
+
+    .about_container{
+        height: 210px;
+    }
+    .gmail_container, .facebook_container{
+        transform: translate(0px, -10px);
+    }
+}
+
+@media only screen and (min-width: 1248px) and (max-width: 1412px){
+    .container_text_1{
+        width: 25%;
+    }
+
+    .card_text_1 *, .card_text_2 *, .card_text_3 *{
+        transform: translateY(0px);
+    }
+    .logo_contact{
+        transform: translateX(0px);
+    }
+    
+    .contact_title{
+        width: 140%;
+        transform: translateX(-60px);
+    }
+
+    .contact_logo{
+        width: 50%;
+        position: relative;
+    }
+        .contact_container{
+        height: 210px;
+    }
+
+    .info{
+        height: 230px;
+    }
+
+    .about_container{
+        height: 210px;
+    }
+    .gmail_container, .facebook_container{
+        transform: translate(0px, -10px);
+    }
+}
+
+@media only screen and (min-width: 1117px) and (max-width: 1247px){
+    .container_text_1{
+        width: 25%;
+    }
+
+    .card_text_1{
+        gap: 4px;
+    }
+
+    .card_text_1 *, .card_text_2 *, .card_text_3 *{
+        transform: translateY(0px);
+    }
+    .card_text_3{
+        gap: 4px;
+    }
+    .logo_man, .logo_woman{
+        transform: translateX(-20px);
+    }
+    .span_group_1, .span_group_2{
+        transform: translateX(-40px);
+    }
+    .gmail_container, .facebook_container{
+        transform: translate(0px, -16px);
+    }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1116px){
+    .container_text_1{
+        width: 32%;
+    }
+    .logo_man, .logo_woman{
+        transform: translateX(-22px);
+    }
+    .span_group_1, .span_group_2{
+        transform: translateX(-44px);
+    }
+    .card_title_1, .card_title_2, .card_title_3{
+        font-size: 18px;
+    }
+    .card_p_1, .card_p_2, .card_p_3{
+        font-size: 14px;
+    }
+
+    .gmail_container span, .facebook_container span{
+        font-size: 14px;
+    }
+    .card_text_1{
+        gap:6px;
+    }
+
+    .card_text_2{
+        gap: 6px;
+    }
+    .contact_title h1{
+        font-size: 22px;
+    }
+    .about h1{
+        font-size: 22px;
+    }
+    .about p{
+        font-size: 14px;
+    }
+    .contact_container{
+        height: 220px;
+    }
+
+    .info{
+        height: 240px;
+    }
+
+    .about_container{
+        height: 220px;
+    }
+    .gmail_container, .facebook_container{
+        transform: translate(0px, -10px);
+    }
+}
+@media only screen and (min-width: 905px) and (max-width: 1024px){
+    .logo_container{
+        transform: translateX(-20%);
+    }
+    .main_nav-link{
+        gap:25px;
+    }
+    .main_nav-link a, .login, .sign_up{
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .content_text_1{
+        font-size: 2.5em;
+        font-weight: 500;
+    }
+    .content_text_2, .content_text_3{
+        font-size: 1.0em;
+        font-weight: 500;
+    }
+    .container_text_1{
+        top:80px;
+        left:80px;
+    }
+    .container_text_2{
+        top:90px;
+        width: 37%;
+        left:90px;
+    }
+    .container_text_3{
+        top:90px;
+        width: 40%;
+        left:90px;
+    }
+
+    .card_container{
+        grid-template-columns: repeat(2, 1fr);
+        gap:20px;
+    }
+    .info{
+        gap:20px;
+    }
+    .wrap_card:last-child{
+        grid-column: 1/-1;
+        height: 240px;
+    }
+    .card_title_1, .card_title_2, .card_title_3{
+        font-size: 17px;
+    }
+    .card_p_1, .card_p_2, .card_p_3{
+        font-size: 14px;
+    }
+    .card_title_1, .card_title_2, .card_title_3{
+        font-size: 18px;
+    }
+    .gmail_container span, .facebook_container span{
+        font-size: 14px;
+    }
+    .contact_title h1{
+        font-size: 22px;
+    }
+    .about_container{
+        padding: 8px;
+    }
+    .about{
+        gap:10px;
+    }
+    .about h1{
+        font-size: 20px;
+        margin: 0px;
+    }
+    .about p{
+        font-size: 14.5px;
+    }
+    .card_text_2{
+        gap: 10px;
+    }
+    .gmail_container, .facebook_container{
+        transform: translate(0px, -16px);
+    }
+}
+
+@media only screen and (min-width: 686px) and (max-width: 904px){  
+    .logo_container{
+        transform: translateX(-20%);
+    }
+    .main_nav-link{
+        gap:25px;
+    }
+    .main_nav-link a, .login, .sign_up{
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .content_text_1{
+        font-size: 2.5em;
+        font-weight: 500;
+    }
+    .content_text_2, .content_text_3{
+        font-size: 1.0em;
+        font-weight: 500;
+    }
+    .contact_title h1{
+        font-size: 22px;
+        transform: translateY(-42px);
+    }
+
+    .contact_logo{
+        width: 70%;
+    }
+    .logo_contact{
+        transform: translateX(-40px);
+    }
+
+    .contact_title{
+        transform: translateX(-100px);
+    }
+
+    .gmail_container, .facebook_container{
+        left: 40px;
+        transform: translate(0px, -16px);
+    }
+
+    .gmail_container span, .facebook_container span{
+        font-size: 12px;
+    }
+    .contact_title h1{
+        font-size: 22px;
+        top: 40px;
+    }
+    .container_text_1{
+        top:80px;
+        left:80px;
+    }
+    .container_text_2{
+        top:90px;
+        width: 37%;
+        left:90px;
+    }
+    .container_text_3{
+        top:90px;
+        width: 40%;
+        left:90px;
+    }
+
+    .card_container{
+        grid-template-columns: repeat(2, 1fr);
+        gap:20px;
+    }
+    .info{
+        gap:20px;
+    }
+    .wrap_card:last-child{
+        grid-column: 1/-1;
+        height: 240px;
+    }
+    .card_title_1, .card_title_2, .card_title_3{
+        font-size: 17px;
+    }
+    .card_p_1, .card_p_2, .card_p_3{
+        font-size: 14px;
+    }
+    .card_title_1, .card_title_2, .card_title_3{
+        font-size: 18px;
+    }
+    .about_container{
+        padding: 8px;
+    }
+    .about{
+        gap:4px;
+    }
+    .about h1{
+        font-size: 20px;
+        margin: 0px;
+    }
+    .about p{
+        font-size: 12.6px;
+    }
+    .logo_man, .logo_woman{
+        transform: translateX(-20px);
+    }
+    .span_group_1, .span_group_2{
+        transform: translateX(-40px);
+        top:5px;
+    }
+    .span_group_1 span, .span_group_2 span{
+        font-size: 12px;
+    }
+    .card_text_2{
+        gap: 10px;
+    }
+}
+
+@media only screen and (min-width: 636px) and (max-width: 685px){  
+    .logo_container{
+        transform: translateX(-20%);
+    }
+    .main_nav-link{
+        gap:25px;
+    }
+    .main_nav-link a, .login, .sign_up{
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .content_text_1{
+        font-size: 2.5em;
+        font-weight: 500;
+    }
+    .content_text_2, .content_text_3{
+        font-size: 1.0em;
+        font-weight: 500;
+    }
+    .gmail_container span, .facebook_container span{
+        font-size: 14px;
+    }
+    .container_text_1{
+        top:80px;
+        left:80px;
+    }
+    .container_text_2{
+        top:90px;
+        width: 37%;
+        left:90px;
+    }
+    .container_text_3{
+        top:90px;
+        width: 40%;
+        left:90px;
+    }
+
+    .card_logo_2{
+        gap:30px;
+    }
+
+    .contact_title h1{
+        font-size: 22px;
+    }
+    
+    .contact_title{
+        transform: translateX(-90px);
+    }
+
+    .contact_logo{
+        width: 60%;
+    }
+    
+    .logo_contact{
+        transform: translateX(-40px);
+    }
+
+    .gmail_container, .facebook_container{
+        left:26px;
+        gap:14px;
+        transform: translate(0px, -20px);
+    }
+
+    .gmail_container span, .facebook_container span{
+        font-size: 12px;
+    }
+
+    .card_container{
+        grid-template-columns: repeat(2, 1fr);
+        gap:20px;
+    }
+    .info{
+        gap:20px;
+    }
+    .wrap_card:last-child{
+        grid-column: 1/-1;
+        height: 240px;
+    }
+    .card_title_1, .card_title_2, .card_title_3{
+        font-size: 17px;
+    }
+    .card_p_1, .card_p_2, .card_p_3{
+        font-size: 14px;
+    }
+    .card_title_1, .card_title_2, .card_title_3{
+        font-size: 18px;
+    }
+    .about_container{
+        padding: 8px;
+    }
+    .about{
+        gap:4px;
+    }
+    .about h1{
+        font-size: 20px;
+        margin: 0px;
+    }
+    .about p{
+        font-size: 12.2px;
+    }
+    .logo_man, .logo_woman{
+        transform: translateX(-18px);
+    }
+    .span_group_1, .span_group_2{
+        transform: translateX(-36px);
+        top:5px;
+    }
+    .span_group_1 span, .span_group_2 span{
+        font-size: 12px;
+    }
+    .card_text_2{
+        gap: 2px;
+    }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 635px){  
+    .logo_container{
+        transform: translateX(-20%);
+    }
+    .main_nav-link{
+        gap:25px;
+    }
+    .main_nav-link a, .login, .sign_up{
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .content_text_1{
+        font-size: 2.5em;
+        font-weight: 500;
+    }
+    .content_text_2, .content_text_3{
+        font-size: 1.0em;
+        font-weight: 500;
+    }
+    .container_text_1{
+        top:80px;
+        left:80px;
+    }
+    .container_text_2{
+        top:90px;
+        width: 37%;
+        left:90px;
+    }
+    .container_text_3{
+        top:90px;
+        width: 40%;
+        left:90px;
+    }
+
+    .card_container{
+        grid-template-columns: repeat(2, 1fr);
+        gap:20px;
+    }
+    .info{
+        gap:20px;
+    }
+    .card_logo_2{
+        gap:30px;
+    }
+    .wrap_card:last-child{
+        grid-column: 1/-1;
+        height: 240px;
+    }
+    .card_title_1, .card_title_2, .card_title_3{
+        font-size: 17px;
+    }
+    .card_p_1, .card_p_2, .card_p_3{
+        font-size: 14px;
+    }
+    .card_title_1, .card_title_2, .card_title_3{
+        font-size: 18px;
+    }
+    .about_container{
+        padding: 8px;
+    }
+    .about{
+        gap:4px;
+    }
+    .about h1{
+        font-size: 20px;
+        margin: 0px;
+    }
+    .about p{
+        font-size: 11.8px;
+    }
+    .logo_man, .logo_woman{
+        transform: translateX(-18px);
+    }
+    .span_group_1, .span_group_2{
+        transform: translateX(-36px);
+        top:5px;
+    }
+    .span_group_1 span, .span_group_2 span{
+        font-size: 11.5px;
+    }
+    .card_text_2{
+        gap: 2px;
+    }
+
+    .gmail_container, .facebook_container{
+        left:20px;
+        gap:14px;
+        transform: translate(0px, -20px);
+    }
+
+    .gmail_container span, .facebook_container span{
+        font-size: 11.4px;
+    }
+    .contact_title{
+        transform: translateX(-110px);
+    }
+
+    .contact_logo{
+        width: 70%;
+    }
+    
+    .logo_contact{
+        transform: translateX(-56px);
+    }
+
+    .contact_title h1{
+        font-size: 22px;
+    }
+}
+
+@media only screen and (min-width: 435px) and (max-width: 600px){
+
+    .logo_container svg{
+        margin: 4px 0px 0px 0px;
+        width: 130px;
+        height: 130px;
+    }
+
+    .logo_container{
+        transform: translateX(-22%);
+    }
+
+    .logo_container span{
+        transform: translateX(-70%);
+        font-size: 13px;
+    }
+
+    .header_container{
+        height: 52px;
+    }
+
+    .nav_container{
+        position: absolute;
+        right: 0px;
+        top: 100%;
+        padding: 0px;
+        height: 0rem;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: height .3s ease-in-out;
+        background: rgba(62, 148, 105, .1);
+        backdrop-filter: blur(50px);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+  }
+
+      .main_nav-link{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        transform: translateX(0%);  
+    }
+    
+    .nav_container.active .main_nav-link a, .nav_container.active .login, .nav_container.active .sign_up{
+        transform: translateY(0px);
+        transition: transform .3s ease;
+        opacity: 1;
+        transition-delay: calc(.1s * var(--i));
+    }
+
+        .main_nav-link a, .login, .sign_up{
+        font-size: 12px;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(-50px);
+        transition: transform .3s ease;
+  }
+    .nav_menu{
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        opacity: 1;
+        fill: var(--fill-color-svg);
+        transform: rotate(0deg);
+    }
+
+    .close_nav{
+        width: 22px;
+        height: 22px;
+        opacity:0;
+        transform: rotate(-90deg);
+        fill: var(--fill-color-svg);
+    }
+
+    .theme_white, .theme_black{
+        width: 22px;
+        height: 22px;
+    }
+
+    .background_theme{
+        top:17px;
+        right: 15px;
+    }
+
+  .main_container{
+    margin: 0px;
+  }
+
+  .hero_banner{
+    height: 380px;
+  }
+
+  .card_container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:15px;
+    padding-inline: 4px;
+    transform: translateY(-5px);
+  }
+
+    .wrap_card{
+        grid-column: 1/-1;
+        height: 240px;
+        box-shadow: none;
+    }
+
+    .menu_icon {
+        transition: transform 0.4s ease, opacity 0.3s ease;
+        visibility: visible;
+        opacity: 1;
+        cursor: pointer;
+        overflow: hidden;
+        background: none;
+        box-decoration-break: none;
+        border: none;
+        top:17px;
+        right: 48px;
+    }
+
+    .content_text_1{
+        font-size: 1.6em;
+        font-weight: 500;
+    }
+    .content_text_2, .content_text_3{
+        font-size: 0.7em;
+        font-weight: 500;
+    }
+    .container_text_1{
+        top:60px;
+        left:50px;
+        width: 36%;
+    }
+    .container_text_2{
+        top:70px;
+        width:48%;
+        left:55px;
+    }
+    .container_text_3{
+        top:70px;
+        width: 56%;
+        left:55px;
+    }
+    
+  .nav_container.active{
+    height: 12.8rem;
+    transition: height .3s ease-in-out;
+    background: rgb(62, 148, 105, .1);
+    backdrop-filter: blur(50px);
+  }
+
+  .menu_icon.active .nav_menu {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+.menu_icon.active .close_nav {
+    opacity: 1;
+    transform: rotate(0deg);
+    }
+
+    .menu_icon svg {
+  transition: transform 0.4s ease, opacity 0.3s ease;
+    }
+
+  .main_nav-link li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+    .info{
+    grid-template-columns: repeat(1, 1fr);
+    height: 398px;
+    gap: 15px;
+    padding-inline: 4px;
+    transform: translateY(-10px);
+    }
+    .about_container{
+        padding: 8px;
+        height: 200px;
+    }
+    .about{
+        gap:4px;
+    }
+    .about h1{
+        font-size: 20px;
+        margin: 0px;
+    }
+    .about p{
+        font-size: 13px;
+    }
+    .logo_man, .logo_woman{
+        transform: translateX(-18px);
+    }
+    .card_logo_2{
+        gap:30px;
+    }
+    .span_group_1, .span_group_2{
+        transform: translateX(-36px);
+        top: 5px;
+    }
+    .span_group_1 span, .span_group_2 span{
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .card_text_1, .card_text_3{
+        gap: 14px;
+    }
+
+    .gmail_container, .facebook_container{
+        left:30px;
+        transform: translate(0px, -14px);
+    }
+
+    .gmail, .facebook{
+        width: 24px;
+        height: 24px;
+    }
+
+    .gmail_container span, .facebook_container span{
+        font-size: 12px;
+    }
+    .logo_contact{
+        width: 150px;
+        height: 150px;
+        transform: translateX(-34px);
+    }
+    
+    .contact_title{
+        width: 144%;
+        transform: translateX(-76px);
+    }
+
+    .contact_logo{
+        width: 50%;
+        position: relative;
+    }
+
+    .contact_container{
+        height: 176px;
+    }
+
+    .contact_info{
+        height: 100px;
+    }
+    .contact_title h1{
+        font-size: 20px;
+    }
+    .form_text{
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .card_1 span, .card_2 span, .card_3 span, .card_4 span, .card_5 span{
+        font-weight: 600;
+    }
+    .card_p_1, .card_p_2, .card_p_3{
+        font-size: 13px;
+        font-weight: 600;
+    }
+    .card_text_2{
+        gap:14px;
+    }
+    .end_footer{
+        height: 30px;
+        padding: 2px;
+    }
+    .copyright{
+        font-size: 12px;
+    }
+    .card_title_1, .card_title_2, .card_title_3{
+        font-size: 19px;
+    }
+}
+
+@media only screen and (min-width: 387px) and (max-width: 434px){
+
+    .logo_container svg{
+        margin: 4px 0px 0px 0px;
+        width: 130px;
+        height: 130px;
+    }
+
+    .logo_container{
+        transform: translateX(-22%);
+    }
+
+    .logo_container span{
+        transform: translateX(-70%);
+        font-size: 13px;
+    }
+
+    .header_container{
+        height: 52px;
+    }
+
+    .nav_container{
+        position: absolute;
+        right: 0px;
+        top: 100%;
+        padding: 0px;
+        height: 0rem;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: height .3s ease-in-out;
+        background: rgba(62, 148, 105, .1);
+        backdrop-filter: blur(50px);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+  }
+
+      .main_nav-link{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        transform: translateX(0%);  
+    }
+    
+    .nav_container.active .main_nav-link a, .nav_container.active .login, .nav_container.active .sign_up{
+        transform: translateY(0px);
+        transition: transform .3s ease;
+        opacity: 1;
+        transition-delay: calc(.1s * var(--i));
+    }
+
+        .main_nav-link a, .login, .sign_up{
+        font-size: 12px;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(-50px);
+        transition: transform .3s ease;
+  }
+        .nav_menu{
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        opacity: 1;
+        fill: var(--fill-color-svg);
+        transform: rotate(0deg);
+    }
+
+    .close_nav{
+        width: 22px;
+        height: 22px;
+        opacity:0;
+        transform: rotate(-90deg);
+        fill: var(--fill-color-svg);
+    }
+
+  .main_container{
+    margin: 0px;
+  }
+
+  .hero_banner{
+    height: 380px;
+  }
+
+  .card_container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:10px;
+    padding-inline: 2px;
+    transform: translateY(-8px);
+  }
+
+    .wrap_card{
+        grid-column: 1/-1;
+        height: 240px;
+        box-shadow: none;
+    }
+    .menu_icon {
+        transition: transform 0.4s ease, opacity 0.3s ease;
+        visibility: visible;
+        opacity: 1;
+        cursor: pointer;
+        overflow: hidden;
+        background: none;
+        box-decoration-break: none;
+        border: none;
+        top:17px;
+        right: 48px;
+    }
+
+    .theme_white, .theme_black{
+        width: 22px;
+        height: 22px;
+    }
+
+    .background_theme{
+        top:17px;
+        right: 15px;
+    }
+
+    .content_text_1{
+        font-size: 1.6em;
+        font-weight: 500;
+    }
+    .content_text_2, .content_text_3{
+        font-size: 0.7em;
+        font-weight: 500;
+    }
+    .container_text_1{
+        top:60px;
+        left:50px;
+        width: 36%;
+    }
+    .container_text_2{
+        top:70px;
+        width:48%;
+        left:55px;
+    }
+    .container_text_3{
+        top:70px;
+        width: 56%;
+        left:55px;
+    }
+    
+  .nav_container.active{
+    height: 12.8rem;
+    transition: height .3s ease-in-out;
+    background: rgb(62, 148, 105, .1);
+    backdrop-filter: blur(50px);
+  }
+
+  .menu_icon.active .nav_menu {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+.menu_icon.active .close_nav {
+    opacity: 1;
+    transform: rotate(0deg);
+    }
+
+    .menu_icon svg {
+  transition: transform 0.4s ease, opacity 0.3s ease;
+    }
+
+  .main_nav-link li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+    .info{
+    grid-template-columns: repeat(1, 1fr);
+    height: 394px;
+    gap:10px;
+    padding-inline: 2px;
+    transform: translateY(-18px);
+    }
+        .about_container{
+        padding: 8px;
+    }
+    .about{
+        gap:4px;
+    }
+    .about h1{
+        font-size: 18px;
+        margin: 0px;
+    }
+    .about p{
+        font-size: 13.5px;
+    }
+    .logo_man, .logo_woman{
+        transform: translateX(-18px);
+    }
+    .card_logo_2{
+        gap:30px;
+    }
+    .span_group_1, .span_group_2{
+        transform: translateX(-36px);
+        top: 5px;
+    }
+    .span_group_1 span, .span_group_2 span{
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .card_text_1, .card_text_3{
+        gap: 14px;
+    }
+
+        .gmail_container, .facebook_container{
+        left:30px;
+        transform: translate(0px, -10px);
+    }
+
+    .gmail, .facebook{
+        width: 24px;
+        height: 24px;
+    }
+
+    .gmail_container span, .facebook_container span{
+        font-size: 12px;
+    }
+    .logo_contact{
+        width: 150px;
+        height: 150px;
+        transform: translateX(-34px);
+    }
+    
+    .contact_title{
+        width: 144%;
+        transform: translateX(-76px);
+    }
+
+    .contact_logo{
+        width: 50%;
+        position: relative;
+    }
+
+    .contact_container{
+        height: 160px;
+    }
+
+    .contact_title h1{
+        font-size: 18px;
+    }
+    .form_text{
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .card_1 span, .card_2 span, .card_3 span, .card_4 span, .card_5 span{
+        font-weight: 600;
+    }
+    .card_p_1, .card_p_2, .card_p_3{
+        font-size: 13px;
+        font-weight: 600;
+    }
+    .card_text_2{
+        gap:10px;
+    }
+    .copyright{
+        font-size: 12px;
+    }
+
+    .card_title_1, .card_title_2, .card_title_3{
+        font-size: 17px;
+    }
+}
+
+@media only screen and (min-width: 321px) and (max-width: 386px){
+
+    .logo_container svg{
+        margin: 4px 0px 0px 0px;
+        width: 130px;
+        height: 130px;
+    }
+
+    .logo_container{
+        transform: translateX(-22%);
+    }
+
+    .logo_container span{
+        transform: translateX(-70%);
+        font-size: 13px;
+    }
+
+    .header_container{
+        height: 52px;
+    }
+
+    .nav_container{
+        position: absolute;
+        right: 0px;
+        top: 100%;
+        padding: 0px;
+        height: 0rem;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: height .3s ease-in-out;
+        background: rgba(62, 148, 105, .1);
+        backdrop-filter: blur(50px);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+  }
+
+      .main_nav-link{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        transform: translateX(0%);  
+    }
+    
+    .nav_container.active .main_nav-link a, .nav_container.active .login, .nav_container.active .sign_up{
+        transform: translateY(0px);
+        transition: transform .3s ease;
+        opacity: 1;
+        transition-delay: calc(.1s * var(--i));
+    }
+
+        .main_nav-link a, .login, .sign_up{
+        font-size: 12px;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(-50px);
+        transition: transform .3s ease;
+  }
+        .nav_menu{
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        opacity: 1;
+        fill: var(--fill-color-svg);
+        transform: rotate(0deg);
+    }
+
+    .close_nav{
+        width: 22px;
+        height: 22px;
+        opacity:0;
+        transform: rotate(-90deg);
+        fill: var(--fill-color-svg);
+    }
+
+  .main_container{
+    margin: 0px;
+  }
+
+  .hero_banner{
+    height: 380px;
+  }
+
+  .card_container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:10px;
+    padding-inline: 2px;
+    transform: translateY(-11px);
+  }
+
+    .wrap_card{
+        grid-column: 1/-1;
+        height: 240px;
+        box-shadow: none;
+    }
+    .menu_icon {
+        transition: transform 0.4s ease, opacity 0.3s ease;
+        visibility: visible;
+        opacity: 1;
+        cursor: pointer;
+        overflow: hidden;
+        background: none;
+        box-decoration-break: none;
+        border: none;
+        top:17px;
+        right: 48px;
+    }
+
+    .theme_white, .theme_black{
+        width: 22px;
+        height: 22px;
+    }
+
+    .background_theme{
+        top:17px;
+        right: 15px;
+    }
+
+    .content_text_1{
+        font-size: 1.6em;
+        font-weight: 500;
+    }
+    .content_text_2, .content_text_3{
+        font-size: 0.7em;
+        font-weight: 500;
+    }
+    .container_text_1{
+        top:60px;
+        left:50px;
+        width: 36%;
+    }
+    .container_text_2{
+        top:70px;
+        width:48%;
+        left:55px;
+    }
+    .container_text_3{
+        top:70px;
+        width: 56%;
+        left:55px;
+    }
+    
+  .nav_container.active{
+    height: 12.8rem;
+    transition: height .3s ease-in-out;
+    background: rgb(62, 148, 105, .1);
+    backdrop-filter: blur(50px);
+  }
+
+  .menu_icon.active .nav_menu {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+.menu_icon.active .close_nav {
+    opacity: 1;
+    transform: rotate(0deg);
+    }
+
+    .menu_icon svg {
+  transition: transform 0.4s ease, opacity 0.3s ease;
+    }
+
+  .main_nav-link li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+    .info{
+        grid-template-columns: repeat(1, 1fr);
+        height: 372px;
+        padding-inline: 2px;
+        gap: 10px;
+        transform: translateY(-20px);
+    }
+
+    .about_container{
+        height: 210px;
+        padding: 8px;
+    }
+    .about{
+        gap:4px;
+    }
+    .about h1{
+        font-size: 18px;
+        margin: 0px;
+    }
+    .about p{
+        font-size: 12.2px;
+    }
+    .logo_man, .logo_woman{
+        transform: translateX(-25px);
+    }
+    .card_logo_2{
+        gap:30px;
+    }
+    .span_group_1, .span_group_2{
+        transform: translateX(-50px);
+        top: 5px;
+    }
+    .span_group_1 span, .span_group_2 span{
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .card_text_2{
+        gap: 10px;
+    }
+
+    .gmail_container, .facebook_container{
+        left:20px;
+        transform: translate(0px, -10px);
+    }
+
+    .logo_contact{
+        width: 150px;
+        height: 150px;
+        transform: translateX(-42px);
+    }
+    
+    .contact_title{
+        width: 80%;
+        transform: translateX(-85px);
+    }
+
+    .contact_logo{
+        width: 50%;
+        position: relative;
+    }
+    .contact_container{
+        height: 160px;
+    }
+
+    .gmail, .facebook{
+        width: 24px;
+        height: 24px;
+    }
+
+    .gmail_container span, .facebook_container span{
+        font-size: 12px;
+    }
+
+    .contact_title h1{
+        font-size: 18px;
+    }
+    .form_text{
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .card_1 span, .card_2 span, .card_3 span, .card_4 span, .card_5 span{
+        font-weight: 500;
+    }
+    .card_p_1, .card_p_2, .card_p_3{
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .copyright{
+        font-size: 12px;
+    }
+    .woman_1, .woman_2, .man_1, .man_2{
+        width: 60px;
+        height: 60px;
+    }
+    .card_title_1, .card_title_2, .card_title_3{
+        font-size: 16px;
+    }
+    .card_button_1, .card_button_2, .card_button_3{
+        font-size: 12px;
+        width: 60px;
+    }
+    .form_1, .form_2, .form_3, .form-man, .form-woman{
+        width: 60px;
+        height: 60px;
+    }
+
+    .wrap_card:nth-child(1){
+        height: 210px;
+    }
+
+    .card_text_1{
+        height: 120px;
+    }
+    .close{
+    right: 18px;
+    top:18px;
+    width: 30px;
+    height: 30px;
+}
+
+.modal_content{
+    width: 80%;
+    height: 100%;
+}
+
+.modal_signup{
+    height: 80%;
+}
+
+#modal_1 form{
+    gap:18px;
+    overflow: hidden;
+}
+
+form .h1_signup{
+    font-weight: 600;
+    font-size: clamp(.9rem, 6vw, 2rem); 
+    transform: translateY(4px);
+}
+
+.group_fullname .user_fullname, .user_gmail, .pass_logo_signup, .pass_logo_confirm{
+    transform: translate(4px, 4px);
+    width: 22px;
+    height: 22px;
+    overflow: hidden;
+}
+
+.full-name, .pass-word_signup, .e-mail, .pass-word-confirm{
+    font-size: 4.5vw;
+    transform: translate(30px, 4px);
+}
+
+.group_fullname.active .full-name,
+.group_email.active .e-mail,
+.group_password_signup.active .pass-word_signup,
+.group_password_confirm.active .pass-word-confirm{
+    transform: translate(4px, -17px);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.gmail-message{
+    font-size: 3.6vw;
+    font-weight: 600;
+}
+
+.input_fullname{
+    height: 30px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 2px;
+    padding: 0px 30px 0px 30px;
+}
+
+.input_email{
+    height: 30px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 2px;
+    padding: 0px 30px 0px 30px;
+}
+
+.input_password_signup{
+    height: 30px;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 0px 54px 0px 30px;
+    border-radius: 2px;
+}
+
+.group_icon_1{
+    transform: translate(-20px, 3px);
+}
+
+.pass_visible_signup, .pass_hidden_signup{
+    width: 24px;
+    height: 24px;
+}
+
+.checkvalid_1{
+    width: 20px;
+    height: 20px;
+    transform: translate(-20px, 5px);
+}
+
+.checkvalid_2{
+    width: 20px;
+    height: 20px;
+    transform: translate(-20px, 5px);
+}
+
+.checkvalid_3{
+    width: 20px;
+    height: 20px;
+    transform: translate(-46px, 5px);
+}
+
+.checkvalid_4{
+    width: 20px;
+    height: 20px;
+    transform: translate(-46px, 5px);
+}
+
+.pass-signup-info, .pass-signup-messageleast, .pass-signup-lowercase, .pass-signup-uppercase, .pass-signup-numbers, .pass-signup-symbols{
+    gap:4px;
+    font-size: 3.0vw;
+    font-weight: 600;
+}
+
+.pass-signup-info{
+    margin-bottom: 4px;
+}
+
+.correct, .wrong{
+    width: 12px;
+    height: 12px;
+}
+
+.input_password_confirm{
+    height: 30px;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 0px 54px 0px 30px;
+    border-radius: 2px;
+}
+
+.group_icon_2{
+    transform: translate(-20px, 3px);
+}
+
+.pass_visible_confirm, .pass_hidden_confirm{
+    width: 24px;
+    height: 24px;
+}
+
+  .submit{
+    width: 24vw;
+    height: 26px;
+    border-radius: 12px;
+  }
+
+.span_group_pass{
+    transform: translateY(30px);
+    border-radius: 8px;
+    padding: 6px;
+    overflow: hidden;
+}
+
+.span_gologin, .gologin{
+    font-size: clamp(.6rem, 3.5vw, 1rem); 
+    font-weight: 500;
+    transform: translateY(-5px);
+}
+
+.signup_text{
+    font-size: 3.5vw;
+    font-weight: 600;
+    transform: translate(-4px, 0px);
+}
+.signup_icon{
+    width: 8vw;
+    height: 20px;
+    transform: translate(-2px, 0px);
+}
+
+#modal_2 form{
+    gap:10px;
+}
+
+.modal_login{
+    height: 76%;
+}
+
+form .h1_login{
+    font-weight: 700;
+    font-size: clamp(1.3rem, 6.5vw, 1.4rem); ;
+    transform: translateY(0px);
+    margin: 0px;
+    bottom: 0px;
+}
+
+form .group_username{
+    gap: 2px;
+}
+
+form .user-name {
+    font-size: .9rem;
+    transform: translateX(-6px);
+  }
+
+form .input-username {
+  height: 30px;
+  padding: 0px 5px 0px 34px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.user_logo, .email_address, .number{
+    width: 26px;
+    height: 26px;
+}
+
+.group_svg_1{
+    transform: translate(4px, 22px);
+}
+
+form .group_password_login{
+    gap: 2px;
+}
+
+form .pass-word_login {
+    font-size: .9rem;
+    transform: translateX(-6px);
+  }
+
+form .input-password_login {
+  height: 30px;
+  gap: 18px;
+  padding: 0px 28px 0px 34px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.pass_logo_login{
+    transform: translate(4px, 24px);
+    position: absolute;
+    width: 26px;
+    height: 26px;
+}
+
+.group_icon_3{
+    position: absolute;
+    transform: translate(-22px, 24px);
+}
+
+.pass_visible_login, .pass_hidden_login{
+    width: 26px;
+    height: 26px;
+}
+
+  .continue {
+    width: 76px;
+    height: 30px;
+    gap: 0px;
+    font-weight: 600;
+    font-size: 7px;
+    border-radius: 12px;
+  }
+
+  .goforgot {
+    font-weight: 500;
+    font-size: .9rem;
+    transform: translateX(-6px);
+    white-space: nowrap;
+  }
+
+   .fb-logo {
+    width: 30px;
+    height: 30px;
+    bottom:20px;
+    right: 26px;
+    transform: translateX(10px);
+    border-radius: 8px;
+  }
+
+  .span_gosignup, .gosignup{
+    font-size: clamp(.8rem, 6vw, .85rem); 
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.login_icon{
+    width: 20vw;
+    height: 20px;
+    transform: translateX(-4px);
+}
+ .login_text{
+    font-size: 14px;
+    transform: translateX(-8px);
+ }
+
+ #modal_3 form{
+    gap:12px;
+}
+
+.modal_forgot{
+    height: 76%;
+}
+
+form .forgot_title{
+    gap: 4px;
+}
+
+form .h1_forgot{
+    font-weight: 700;
+    font-size: 6vw;
+}
+
+form .forgot_text{
+    font-size: clamp(.6rem, 3.5vw, 1rem); 
+    font-weight: 500;
+}
+
+form .group_email_mobile{
+    gap: 6px;
+}
+
+form .email_mobile {
+    font-size: 11px;
+    left: 4px;
+    top:4px;
+}
+
+form .input-email-mobile {
+  height: 26px;
+  padding: 0px 10px 0px 28px;
+  font-size: 10px;
+  border-radius: 4px;
+}
+
+.group_icon_4{
+    transform: translate(6px, 25px);
+}
+
+.emailadd, .mobile-number, .default-icon{
+    width: 16px;
+    height: 16px;
+}
+
+  .continueforgot {
+    width: 24vw;
+    height: 20px;
+    gap: 0px;
+    font-weight: 500;
+    font-size: 3.8vw;
+    border-radius: 12px;
+  }
+
+  .gotologin{
+    font-size: 3.6vw;
+    font-weight: 500;
+    color: var(--text-color);
+}
+}
+
+@media only screen and (max-width: 320px){
+
+    .logo_container span{
+        font-size: 12px;
+        transform: translateX(-50%); 
+    } 
+        
+    .logo_container svg{
+        transform: scale(70%);
+        margin: 4px 0px 0px 0px;
+    }
+    
+    .logo_container{
+         transform: translateX(-26%); 
+    }
+
+    .nav_container{
+        position: absolute;
+        right: 0px;
+        top: 100%;
+        padding: 0px;
+        height: 0rem;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: height .3s ease-in-out;
+        background: rgba(62, 148, 105, .1);
+        backdrop-filter: blur(50px);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    }
+
+    .main_nav-link{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        transform: translateX(0%);  
+    }
+
+    .nav_container.active{
+        height: 12.8rem;
+        transition: height .3s ease-in-out;
+        background: rgb(62, 148, 105, .1);
+        backdrop-filter: blur(50px);
+    }
+
+    .nav_container.active .main_nav-link a, .nav_container.active .login, .nav_container.active .sign_up{
+        transform: translateY(0px);
+        transition: transform .3s ease;
+        opacity: 1;
+        transition-delay: calc(.1s * var(--i));
+    }
+
+    .main_nav-link a, .login, .sign_up{
+        font-size: 10px;
+        font-weight: 500;
+        opacity: 0;
+        transform: translateY(-50px);
+        transition: transform .3s ease;
+    }
+
+    .nav_menu{
+        position: absolute;
+        opacity: 1;
+        fill: var(--fill-color-svg);
+        transform: rotate(0deg);
+    }
+
+    .nav_menu, .close_nav, .background_theme{
+        width: 20px; 
+        height: 20px;
+    }
+
+    .close_nav{
+        opacity:0;
+        transform: rotate(-90deg);
+        fill: var(--fill-color-svg);
+    }
+    .main_container{
+        margin: 0px;
+    }
+    
+    .hero_banner{
+        height: 300px;
+    }
+    .card_container{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap:4px;
+        padding-inline: 2px;
+        transform: translateY(-15px);
+    }
+    .background_theme{
+        top:14px;
+        right: 14px;
+    }
+    .menu_icon {
+        transition: transform 0.4s ease, opacity 0.3s ease;
+        visibility: visible;
+        opacity: 1;
+        cursor: pointer;
+        overflow: hidden;
+        background: none;
+        box-decoration-break: none;
+        border: none;
+        top: 15px;
+        right:44px;
+    }
+    .theme_black, .theme_white{
+        border-radius: 5px;
+        height: 22px;
+    }
+    .content_text_1{
+        font-size: 1.5em;
+        font-weight: 500;
+    }
+    .text_container{
+        top: 50px;
+    }
+    .container_text_1{
+        top: 40px;
+        left:30px;
+        width: 64%;
+    }
+    .content_text_2, .content_text_3{
+        font-size: .5rem;
+        font-weight: 500;
+    }
+    .container_text_2{
+        top: 40px;
+        width: 50%;
+        left: 45px;
+    }
+    .container_text_3{
+        top: 40px;
+        width: 56%;
+        left:45px;
+    }
+    .header_container{
+        height: 46px;
+    }
+    .wrap_card{
+        grid-column: 1/-1;
+        height: 204px;
+        box-shadow: none;
+    }
+
+  .menu_icon.active .nav_menu {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+.menu_icon.active .close_nav {
+    opacity: 1;
+    transform: rotate(0deg);
+    }
+
+    .menu_icon svg {
+  transition: transform 0.4s ease, opacity 0.3s ease;
+    }
+
+  .main_nav-link li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+    .info{
+    grid-template-columns: repeat(1, 1fr);
+    gap: 4px;
+    height: 342px;
+    padding-inline: 2px;
+    transform: translateY(-31px);
+    }
+    .about_container{
+        padding: 8px;
+        height: 204px;
+    }
+    .about{
+        gap:4px;
+    }
+    .about h1{
+        font-size: 20px;
+        margin: 0px;
+    }
+    .about p{
+        font-size: 12.2px;
+    }
+    .logo_man, .logo_woman{
+        transform: translateX(-18px);
+    }
+    .card_logo_1{
+        height: 80px;
+    }
+    .card_text_1{
+        height: 120px;
+        gap: 10px;
+    }
+    .card_logo_2{
+        gap:30px;
+    }
+
+    .man_2, .woman_2{
+        width: 40%;
+        height: 60px;
+    }
+
+    .span_group_1, .span_group_2{
+        transform: translateX(-30px);
+        top: 0px;
+        justify-content: center;
+    }
+    .span_group_1 span, .span_group_2 span{
+        font-size: 3.8vw;
+        font-weight: 600;
+    }
+    .card_text_2{
+        gap: 0px;
+    }
+
+    .gmail_container, .facebook_container{
+        transform: translateY(-10px);
+        left:20px;
+        gap: 10px;
+    }
+
+    .gmail, .facebook{
+        width: 20px;
+        height: 20px;
+    }
+
+    .gmail_container span, .facebook_container span{
+        font-size: 3.8vw;
+    }
+
+    .logo_contact{
+        width: 130px;
+        height: 130px;
+        transform: translateX(-36px);
+    }
+    
+    .contact_title{
+        width: 140%;
+        transform: translateX(-74px);
+        overflow: visible;
+    }
+
+    .contact_logo{
+        width: 100%;
+        position: relative;
+    }
+    .contact_container{
+        height: 160px;
+    }
+
+    .contact_title h1{
+        font-size: 18px;
+    }
+    .form_text{
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .card_1 span, .card_2 span, .card_3 span, .card_4 span, .card_5 span{
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .card_p_1, .card_p_2, .card_p_3{
+        font-size: 13px;
+        font-weight: 600;
+    }
+    .card_text_2{
+        gap:6px;
+    }
+    .copyright{
+        font-size: 11px;
+    }
+    .end_footer{
+        height: 22px;
+        padding: 3px;
+        bottom: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .card_title_1, .card_title_2, .card_title_3, .about h1{
+        font-size: 12.5px;
+    }
+    .card_p_1, .card_p_2, .card_p_3{
+        font-size: 10px;
+    }
+    .about p{
+        font-size: 3.9vw;
+    }
+    .main_container{
+        height: fit-content;
+    }
+    .card_button_1, .card_button_2, .card_button_3{
+        width:30px;
+        border-radius: 6px;
+        font-size: 8px;
+    }
+    .card_1 img, .card_2 img, .card_3 img, .card_4 img, .card_5 img{
+        width: 80%;
+        height: 50px;
+    }
+
+    .man_1, .woman_1{
+        width: 20%;
+        height: 50px;
+    }
+
+    .form-man, .form-woman{
+        width: 50px;
+        height: 50px;
+    }
+
+    .logo_form{
+        width: 54%;
+        height: 100%;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        left: 0px;
+    }
+
+    .form_1, .form_2, .form_3{
+        width: 50px;
+        height: 50px;
+    }
+
+    .form_text{
+        position: absolute;
+        z-index: 2;
+        width: fit-content;
+        right: 5px;
+    }
+
+    .form_text span{
+        font-size: 4vw;
+    }
+.close{
+    right: 8px;
+    top:8px;
+    width: 20px;
+    height: 20px;
+}
+
+.modal_content{
+    width: 80%;
+    height: 100%;
+    position: relative;
+}
+
+.modal_signup{
+    height: 80%;
+}
+
+#modal_1 form{
+    gap:18px;
+    overflow: hidden;
+}
+
+form .h1_signup{
+    font-weight: 600;
+    font-size: clamp(.9rem, 5.8vw, 2rem); 
+    transform: translateY(4px);
+}
+
+.group_fullname .user_fullname, .user_gmail, .pass_logo_signup, .pass_logo_confirm{
+    transform: translate(4px, 4px);
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+}
+
+.full-name, .pass-word_signup, .e-mail, .pass-word-confirm{
+    font-size: 4.5vw;
+    transform: translate(24px, 2px);
+}
+
+.group_fullname.active .full-name,
+.group_email.active .e-mail,
+.group_password_signup.active .pass-word_signup,
+.group_password_confirm.active .pass-word-confirm{
+    transform: translate(4px, -17px);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.gmail-message{
+    font-size: 3.6vw;
+    font-weight: 600;
+}
+
+.input_fullname{
+    height: 26px;
+    width: 100%;
+    font-size: 10px;
+    font-weight: 400;
+    border-radius: 2px;
+    padding: 0px 28px 0px 24px;
+}
+
+.input_email{
+    height: 26px;
+    font-size: 10px;
+    font-weight: 400;
+    border-radius: 2px;
+    padding: 0px 28px 0px 24px;
+}
+
+.input_password_signup{
+    height: 26px;
+    font-size: 10px;
+    font-weight: 400;
+    padding: 0px 48px 0px 24px;
+    border-radius: 2px;
+}
+
+.group_icon_1{
+    transform: translate(-18px, 3px);
+}
+
+.pass_visible_signup, .pass_hidden_signup{
+    width: 20px;
+    height: 20px;
+}
+
+.checkvalid_1{
+    width: 16px;
+    height: 16px;
+    transform: translate(-18px, 1px);
+}
+
+.checkvalid_2{
+    width: 16px;
+    height: 16px;
+    transform: translate(-18px, 1px);
+}
+
+.checkvalid_3{
+    width: 16px;
+    height: 16px;
+    transform: translate(-40px, 1px);
+}
+
+.checkvalid_4{
+    width: 16px;
+    height: 16px;
+    transform: translate(-40px, 1px);
+}
+
+.pass-signup-info, .pass-signup-messageleast, .pass-signup-lowercase, .pass-signup-uppercase, .pass-signup-numbers, .pass-signup-symbols{
+    gap:4px;
+    font-size: 3.0vw;
+    font-weight: 600;
+}
+
+.pass-signup-info{
+    margin-bottom: 4px;
+}
+
+.correct, .wrong{
+    width: 12px;
+    height: 12px;
+}
+
+.input_password_confirm{
+    height: 26px;
+    font-size: 10px;
+    font-weight: 400;
+    padding: 0px 48px 0px 24px;
+    border-radius: 2px;
+}
+
+.group_icon_2{
+    transform: translate(-18px, 3px);
+}
+
+.pass_visible_confirm, .pass_hidden_confirm{
+    width: 20px;
+    height: 20px;
+}
+
+  .submit{
+    width: 24vw;
+    height: 20px;
+    border-radius: 12px;
+  }
+
+.span_group_pass{
+    transform: translateY(15px);
+    border-radius: 8px;
+    padding: 6px;
+    overflow: hidden;
+}
+
+.span_gologin, .gologin{
+    font-size: clamp(.6rem, 3.5vw, 1rem); 
+    font-weight: 500;
+    transform: translateY(-5px);
+}
+
+.signup_text{
+    font-size: 3.5vw;
+    font-weight: 600;
+    transform: translate(-4px, 0px);
+}
+.signup_icon{
+    width: 8vw;
+    height: 20px;
+    transform: translate(-2px, 0px);
+}
+
+#modal_2 form{
+    gap:8px;
+}
+
+.modal_login{
+    height: 70%;
+}
+
+form .h1_login{
+    font-weight: 600;
+    font-size: clamp(1rem, 6vw, 2rem); ;
+    transform: translateY(0px);
+    margin: 0px;
+    bottom: 0px;
+}
+
+form .group_username{
+    gap: 2px;
+}
+
+form .user-name {
+    font-size: .65rem;
+    transform: translateX(-6px);
+  }
+
+form .input-username {
+  height: 26px;
+  padding: 0px 5px 0px 24px;
+  border-radius: 4px;
+  font-size: 10px;
+}
+
+.user_logo, .email_address, .number{
+    width: 16px;
+    height: 16px;
+}
+
+.group_svg_1{
+    transform: translate(4px, 20px);
+}
+
+form .group_password_login{
+    gap: 2px;
+}
+
+form .pass-word_login {
+    font-size: .7rem;
+    transform: translateX(-6px);
+  }
+
+form .input-password_login {
+  height: 26px;
+  gap: 18px;
+  padding: 0px 28px 0px 24px;
+  border-radius: 4px;
+  font-size: 10px;
+}
+
+.pass_logo_login{
+    transform: translate(4px, 20px);
+    position: absolute;
+    width: 16px;
+    height: 16px;
+}
+
+.group_icon_3{
+    position: absolute;
+    transform: translate(-18px, 20px);
+}
+
+.pass_visible_login, .pass_hidden_login{
+    width: 18px;
+    height: 18px;
+}
+
+  .continue {
+    width: 66px;
+    height: 20px;
+    gap: 0px;
+    font-weight: 600;
+    font-size: 7px;
+    border-radius: 12px;
+  }
+
+  .goforgot {
+    font-weight: 500;
+    font-size: .7rem;
+    transform: translateX(-6px);
+    white-space: nowrap;
+  }
+
+   .fb-logo {
+    width: 20px;
+    height: 20px;
+    bottom:10px;
+    right: 20px;
+    transform: translateX(10px);
+    border-radius: 8px;
+  }
+
+  .span_gosignup, .gosignup{
+    font-size: clamp(.5rem, 4vw, .7rem); 
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.login_icon{
+    width: 16w;
+    height: 16px;
+    transform: translateX(-4px);
+}
+ .login_text{
+    font-size: 11px;
+    transform: translateX(-4px);
+ }
+
+ #modal_3 form{
+    gap:12px;
+}
+
+.modal_forgot{
+    height: 76%;
+}
+
+form .forgot_title{
+    gap: 4px;
+}
+
+form .h1_forgot{
+    font-weight: 700;
+    font-size: 6vw;
+}
+
+form .forgot_text{
+    font-size: clamp(.6rem, 3.5vw, 1rem); 
+    font-weight: 500;
+}
+
+form .group_email_mobile{
+    gap: 6px;
+}
+
+form .email_mobile {
+    font-size: 11px;
+    left: 4px;
+    top:4px;
+}
+
+form .input-email-mobile {
+  height: 26px;
+  padding: 0px 10px 0px 28px;
+  font-size: 10px;
+  border-radius: 4px;
+}
+
+.group_icon_4{
+    transform: translate(6px, 25px);
+}
+
+.emailadd, .mobile-number, .default-icon{
+    width: 16px;
+    height: 16px;
+}
+
+  .continueforgot {
+    width: 24vw;
+    height: 20px;
+    gap: 0px;
+    font-weight: 500;
+    font-size: 3.8vw;
+    border-radius: 12px;
+  }
+
+  .gotologin{
+    font-size: 3.6vw;
+    font-weight: 500;
+    color: var(--text-color);
+}
+}
+
+@media only screen and (max-width: 190px){
+
+    .logo_container span{
+        font-size:.5em;
+        left:70px
+    }
+
+    .logo_container svg{
+        width: 90px;
+        height: 90px;
+    }
+
+    .header_container{
+        height: 36px;
+    }
+
+    .background_theme{
+        top: 13px;
+        right:4px;
+        position: absolute;
+    }
+    .theme_black{
+        width: 14px;
+        height: 14px;
+    }
+
+    .theme_white{
+        width: 14px;
+        height: 14px;
+    }
+
+    .menu_icon{
+        right:30px;
+        top: 13px;
+    }
+
+    .nav_menu{
+        width: 14px;
+        height: 14px;
+    }
+
+    .close_nav{
+        width: 14px;
+        height: 14px;
+    }
+
+    .text_container{
+        top:36px;
+    }
+
+    .hero_banner{
+        height: 240px;
+    }
+
+    .nav_container.active{
+        height: 8em;
+    }
+
+    .main_nav-link{
+        gap:15px;
+    }
+
+    .main_nav-link a, .login, .sign_up{
+        font-size: 7px;
+    }
+
+    .container_text_1{
+        top: 40px;
+        left:20px;
+        width: 70%;
+    }
+
+    .content_text_2, .content_text_3{
+        font-size: 5vw;
+        font-weight: 500;
+    }
+
+    .content_text_1{
+        font-size: 10vw;
+    }
+
+    .container_text_2{
+        top: 40px;
+        width: 70%;
+        left: 20px;
+    }
+
+    .container_text_3{
+        top: 40px;
+        width: 70%;
+        left:20px;
+    }
+
+    .card_container{
+        padding-inline: 1px;
+        gap: 2px;
+        transform: translateY(-18px);
+    }
+
+    .group_carousel_1, .carousel_1, .card_logo_1{
+        height: 50px;
+    }
+
+    .wrap_card{
+        height: 128px;
+        padding: 0px;
+        box-shadow: none;
+    }
+
+    .group_carousel_1{
+        padding-block: 4px;
+    }
+
+    .card_logo_2{
+        gap: 10px;
+    }
+
+    .man_1, .woman_1{
+        width: 20%;
+        height: 30px;
+    }
+
+    .card_logo_man, .card_logo_woman{
+        align-items: normal;
+        justify-content: normal;
+    }
+
+    .logo_man, .logo_woman{
+         transform: translate(0px, 0px);
+         gap: 0px;
+         width: 40%;
+    }
+
+    .man_2, .woman_2{
+        width: 50%;
+        height: 30px;
+    }
+
+    .span_group_1 span, .span_group_2 span{
+        font-size: 3.5vw;
+    }
+
+    .span_group_1, .span_group_2{
+        height: 50px;
+        transform: translate(-2px, 0px);
+        top:0px;
+        padding: 0px;
+        justify-content: center;
+    }
+
+    .card_text_1, .card_text_2, .card_text_3{
+        height: 74px;
+        gap:2px;
+        padding-inline: 4px;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+
+    .card_1, .card_2, .card_3, .card_4, .card_5 {
+        height: fit-content;
+    }
+
+    .card_1 img, .card_2 img, .card_3 img, .card_4 img, .card_5 img{
+        width: 100%;
+        height: 30px;
+    }
+
+    .card_title_1, .card_title_2, .card_title_3{
+        font-size: 4.5vw;
+    }
+
+    .card_p_1, .card_p_2, .card_p_3{
+        font-size: 3.8vw;
+    }
+
+    .card_1 span, .card_2 span, .card_3 span, .card_4 span, .card_5 span{
+        font-size: 3.8vw;
+    }
+
+    .card_button_1, .card_button_2, .card_button_3{
+        width: 18%;
+        height: 14%;
+        font-size: 3.3vw;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .end_footer{
+        height: 14px;
+        padding: 3px;
+        bottom: 0px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logo_contact{
+        width: 150px;
+        height: 150px;
+        transform: translateX(0px);
+    }
+    
+    .contact_title{
+        width: 50%;
+        transform: translateX(0px);
+    }
+
+    .contact_logo{
+        width: 50%;
+        position: relative;
+    }
+    .contact_container{
+        height: 90px;
+    }
+
+    .contact_title h1{
+        font-size: 4.4vw;
+        transform: translateY(1px);
+    }
+
+    .contact_info{
+        height: 50px;
+        gap:8px;
+    }
+
+    .gmail_container, .facebook_container{
+        display: flex;
+        left: 0px;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        transform: translate(0px, -2px);
+    }
+
+    .gmail_container span, .facebook_container span{
+        font-size: 3.5vw;
+    }
+    .gmail, .facebook{
+        width: 10%;
+        height: 10px;
+    }
+
+    .copyright{
+        font-size: 3.5vw;
+    }
+    .info{
+        height: 190px;
+        padding-inline: 1px;
+        gap:2px;
+        transform: translateY(-36px);
+    }
+
+    .about h1{
+        font-size: 4.4vw;
+    }
+
+    .about p {
+        font-size: 3.9vw;
+    }
+
+    .about_container{
+        padding: 2px 4px 2px 4px;
+        height: 132px;
+    }
+
+    .form-man, .form-woman{
+        width: 30px;
+        height: 30px;
+    }
+
+    .logo_form{
+        width: 54%;
+        height: 100%;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        left: 0px;
+    }
+
+    .form_1, .form_2, .form_3{
+        width: 30px;
+        height: 30px;
+    }
+
+    .form_text{
+        position: absolute;
+        z-index: 2;
+        width: fit-content;
+        right: 0px;
+    }
+
+    .form_text span{
+        font-size: 3.5vw;
+    }
+
+.close{
+    right: 8px;
+    top:8px;
+    width: 16px;
+    height: 16px;
+}
+
+.modal_content{
+    width: 80%;
+    height: 100%;
+}
+
+.modal_signup{
+    height: 76%;
+}
+
+#modal_1 form{
+    gap:12px;
+    overflow: hidden;
+}
+
+form .h1_signup{
+    font-weight: 600;
+    font-size: 6.2vw;
+    transform: translateY(4px);
+}
+
+.group_fullname .user_fullname, .user_gmail, .pass_logo_signup, .pass_logo_confirm{
+    transform: translate(4px, 2.5px);
+    width: 11px;
+    height: 11px;
+    overflow: hidden;
+}
+
+.full-name, .pass-word_signup, .e-mail, .pass-word-confirm{
+    font-size: 4.5vw;
+    transform: translate(20px, 2px);
+}
+
+.group_fullname.active .full-name,
+.group_email.active .e-mail,
+.group_password_signup.active .pass-word_signup,
+.group_password_confirm.active .pass-word-confirm{
+    transform: translate(4px, -12px);
+    font-size: 8px;
+    font-weight: 600;
+}
+
+.gmail-message{
+    font-size: 3.6vw;
+    font-weight: 600;
+}
+
+.input_fullname{
+    height: 16px;
+    width: 100%;
+    font-size: 7px;
+    font-weight: 400;
+    border-radius: 2px;
+    padding: 0px 18px 0px 18px;
+}
+
+.input_email{
+    height: 16px;
+    font-size: 7px;
+    font-weight: 400;
+    border-radius: 2px;
+    padding: 0px 18px 0px 18px;
+}
+
+.input_password_signup{
+    height: 16px;
+    font-size: 7px;
+    font-weight: 400;
+    padding: 0px 30px 0px 16px;
+    border-radius: 2px;
+}
+
+.group_icon_1{
+    transform: translate(-13px, 2px);
+}
+
+.pass_visible_signup, .pass_hidden_signup{
+    width: 12px;
+    height: 12px;
+}
+
+.checkvalid_1{
+    width: 10px;
+    height: 10px;
+    transform: translate(-12px, -2px);
+}
+
+.checkvalid_2{
+    width: 10px;
+    height: 10px;
+    transform: translate(-12px, -2px);
+}
+
+.checkvalid_3{
+    width: 10px;
+    height: 10px;
+    transform: translate(-27px, -2px);
+}
+
+.checkvalid_4{
+    width: 10px;
+    height: 10px;
+    transform: translate(-27px, -2px);
+}
+
+.pass-signup-info, .pass-signup-messageleast, .pass-signup-lowercase, .pass-signup-uppercase, .pass-signup-numbers, .pass-signup-symbols{
+    gap:4px;
+    font-size: 3.0vw;
+    font-weight: 600;
+}
+
+.pass-signup-info{
+    margin-bottom: 4px;
+}
+
+.correct, .wrong{
+    width: 8px;
+    height: 8px;
+}
+
+.input_password_confirm{
+    height: 16px;
+    font-size: 7px;
+    font-weight: 400;
+    padding: 0px 30px 0px 17px;
+    border-radius: 2px;
+}
+
+.group_icon_2{
+    transform: translate(-13px, 2px);
+}
+
+.pass_visible_confirm, .pass_hidden_confirm{
+    width: 12px;
+    height: 12px;
+}
+
+  .submit{
+    width: 24vw;
+    height: 12px;
+    border-radius: 12px;
+  }
+
+.span_group_pass{
+    transform: translateY(15px);
+    border-radius: 8px;
+    padding: 6px;
+    overflow: hidden;
+}
+
+.span_gologin, .gologin{
+    font-size: 3.5vw;
+    font-weight: 500;
+    transform: translateY(-5px);
+}
+
+.signup_text{
+    font-size: 3.5vw;
+    font-weight: 600;
+    transform: translate(-2px, 0px);
+}
+.signup_icon{
+    width: 8vw;
+    height: 14px;
+    transform: translate(-1px, 0px);
+}
+
+#modal_2 form{
+    gap:8px;
+}
+
+.modal_login{
+    height: 76%;
+}
+
+form .h1_login{
+    font-weight: 600;
+    font-size: 6.2vw;
+    transform: translateY(0px);
+    margin: 0px;
+    bottom: 0px;
+}
+
+form .group_username{
+    gap: 2px;
+}
+
+form .user-name {
+    font-size: 4vw;
+    transform: translateX(-6px);
+  }
+
+form .input-username {
+  height: 16px;
+  padding: 0px 5px 0px 18px;
+  border-radius: 4px;
+  font-size: 8px;
+}
+
+.user_logo, .email_address, .number{
+    width: 11px;
+    height: 11px;
+    position: absolute;
+    top: 21px;
+    transform: translate(0px, -6px);
+}
+
+.group_svg_1{
+    transform: translate(4px, 0px);
+}
+
+form .group_password_login{
+    gap: 2px;
+}
+
+form .pass-word_login {
+    font-size: 4vw;
+    transform: translateX(-6px);
+  }
+
+form .input-password_login {
+  height: 16px;
+  gap: 18px;
+  padding: 0px 20px 0px 18px;
+  border-radius: 4px;
+  font-size: 8px;
+}
+
+.pass_logo_login{
+    transform: translate(4px, 14px);
+    position: absolute;
+    width: 11px;
+    height: 11px;
+}
+
+.group_icon_3{
+    position: absolute;
+    transform: translate(-12px, 14px);
+}
+
+.pass_visible_login, .pass_hidden_login{
+    width: 12px;
+    height: 12px;
+}
+
+  .continue {
+    width: 24vw;
+    height: 16px;
+    gap: 0px;
+    font-weight: 600;
+    font-size: 7px;
+    border-radius: 12px;
+  }
+
+  .goforgot {
+    font-weight: 500;
+    font-size: 4vw;
+    transform: translateX(-6px);
+    white-space: nowrap;
+  }
+
+   .fb-logo {
+    width: 14px;
+    height: 14px;
+    bottom:8px;
+    right: 18px;
+    transform: translateX(10px);
+    border-radius: 8px;
+  }
+
+  .span_gosignup, .gosignup{
+    font-size: 3.5vw;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.login_icon, .login_text{
+    transform: translate(0px, 0px);
+}
+
+.login_icon{
+    width: 7vw;
+    height: 12px;
+    transform: translateX(-1px);
+}
+ .login_text{
+    font-size: 3.5vw;
+ }
+
+ #modal_3 form{
+    gap:12px;
+}
+
+.modal_forgot{
+    height: 76%;
+}
+
+form .forgot_title{
+    gap: 4px;
+}
+
+form .h1_forgot{
+    font-weight: 700;
+    font-size: 6vw;
+}
+
+form .forgot_text{
+    font-size: 4vw;
+    font-weight: 500;
+}
+
+form .group_email_mobile{
+    gap: 6px;
+}
+
+form .email_mobile {
+    font-size: 4.2vw;
+    left: 4px;
+}
+
+form .input-email-mobile {
+  height: 16px;
+  padding: 0px 10px 0px 20px;
+  font-size: 7px;
+  border-radius: 4px;
+  border-width: 1px;
+}
+
+.group_icon_4{
+    transform: translate(4px, 19px);
+}
+
+.emailadd, .mobile-number, .default-icon{
+    width: 11px;
+    height: 11px;
+}
+
+  .continueforgot {
+    width: 24vw;
+    height: 16px;
+    gap: 0px;
+    font-weight: 500;
+    font-size: 3.8vw;
+    border-radius: 12px;
+  }
+
+  .gotologin{
+    font-size: 3.6vw;
+    font-weight: 500;
+    color: var(--text-color);
+}
+}
+
